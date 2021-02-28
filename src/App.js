@@ -53,7 +53,7 @@ class App extends React.Component {
             </SubMenu>
           </Menu>
         </Sider>
-        <Content style={{ padding: '0 24px', minHeight: 280 }}>co</Content>
+        <Content style={{ padding: '0 24px', minHeight: 280 }}>ku</Content>
       </Layout>
     </Content>
     <Footer style={{ textAlign: 'center' }}>Ant Design ©2018 Created by Ant UED</Footer>
