@@ -1,14 +1,19 @@
 
 import '../App.css';
 import React from 'react'
-import { Layout, Menu, Breadcrumb } from 'antd';
-import {
-  DesktopOutlined,
-  PieChartOutlined,
-  FileOutlined,
-  TeamOutlined,
-  UserOutlined,
-} from '@ant-design/icons';
+import { Layout, Menu} from 'antd';
+import Bisec from '../lesson/bisection';
+// import Falsepo from './lesson/falseposition';
+// import Onepoint from './lesson/onepoint';
+// import Newton from './lesson/newtonrap';
+// import Secan from './lesson/secant';
+// import Crramers from './lesson/cramerru';
+// import GaussEli from './lesson/gausseli';
+// import GaussJor from './lesson/gaussjor';
+// import LUdecom from './lesson/lude';
+import { Route } from "react-router-dom";
+import { HashRouter } from 'react-router-dom';
+import { Link } from "react-router-dom";
 
 const { Header, Content, Footer, Sider } = Layout;
 const { SubMenu } = Menu;
@@ -33,7 +38,9 @@ class La extends React.Component {
                         <div className="logo" />
                         <Menu theme="dark" defaultSelectedKeys={['1']} mode="inline">
                           <SubMenu key="sub1" title="Root of equations">
-                            <Menu.Item key="3">Bisection Method</Menu.Item>
+                            <Menu.Item key="3">Bisection Method
+                            <Link to='/Bisection'>Bisection</Link>  
+                            </Menu.Item>
                             <Menu.Item key="4">Falseposition Method</Menu.Item>
                             <Menu.Item key="5">Onepoint Method</Menu.Item>
                             <Menu.Item key="6">Newton Raphson</Menu.Item>
@@ -51,12 +58,8 @@ class La extends React.Component {
                       <Layout className="site-layout">
                         <Header className="site-layout-background" style={{ padding: 0 }} />
                         <Content style={{ margin: '0 16px' }}>
-                          <Breadcrumb style={{ margin: '16px 0' }}>
-                            <Breadcrumb.Item>User</Breadcrumb.Item>
-                            <Breadcrumb.Item>Bill</Breadcrumb.Item>
-                          </Breadcrumb>
                           <div className="site-layout-background" style={{ padding: 24, minHeight: 360 }}>
-                            Bill is a cat.
+                            <Route path='/Bisection' component={Bisec}></Route>
                           </div>
                         </Content>
                         <Footer style={{ textAlign: 'center' }}>Ant Design ©2018 Created by Ant UED</Footer>
