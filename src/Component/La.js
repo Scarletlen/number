@@ -39,7 +39,7 @@ class La extends React.Component {
                         <Menu theme="dark" defaultSelectedKeys={['1']} mode="inline">
                           <SubMenu key="sub1" title="Root of equations">
                             <Menu.Item key="3">Bisection Method
-                            <Link to='/Bisection'>Bisection</Link>  
+                            {/* <Link to='/Bisection'>Bisection</Link>   */}
                             </Menu.Item>
                             <Menu.Item key="4">Falseposition Method</Menu.Item>
                             <Menu.Item key="5">Onepoint Method</Menu.Item>
@@ -59,7 +59,7 @@ class La extends React.Component {
                         <Header className="site-layout-background" style={{ padding: 0 }} />
                         <Content style={{ margin: '0 16px' }}>
                           <div className="site-layout-background" style={{ padding: 24, minHeight: 360 }}>
-                            <Route path='/Bisection' component={Bisec}></Route>
+                            {/* <Route path='/Bisection' component={Bisec}></Route> */}
                           </div>
                         </Content>
                         <Footer style={{ textAlign: 'center' }}>Ant Design ©2018 Created by Ant UED</Footer>
