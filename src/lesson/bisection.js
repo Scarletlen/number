@@ -84,8 +84,9 @@ class Bisection extends React.Component{
                 <div className="in_box">
                     <h2>Bisection Method</h2>
                     <div>
-                        <span><Input placeholder="x^4-13" onChange={this.getEquation} className="Input"/></span>
-                        <span className="Calculate_Button"><Button type="primary" onClick={this.show_value} >Calculate</Button></span>
+                        <span>F(x) :</span>
+                        <span><Input placeholder="x^4-13" onChange={this.getEquation} className="Input_2"/></span>
+                        <span className="PoomBisec"><Button type="primary" onClick={this.show_value} >Calculate</Button></span>
                     </div>
                     <div>
                         <span className="Text_Input_2"> XL : </span>

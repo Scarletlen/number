@@ -1,5 +1,4 @@
 
-import '../App.css';
 import React from 'react'
 import { Layout, Menu } from 'antd';
 import Bisec from '../lesson/bisection';
