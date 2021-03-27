@@ -7,16 +7,17 @@ import { Button } from 'antd';
 class Bisection extends React.Component{
 
     state = {
-        Equation: 'x^4-13',
+        Equation:'x^4-13',
         XL: '1.5',
         XR: '2.0',
         ERROR: '0.000001',
         result: '',
       };
-
+     
 
     getEquation = (e) => {
         this.setState({
+
             Equation: e.target.value,
         });
     };
@@ -78,9 +79,10 @@ class Bisection extends React.Component{
     }
 
     render(){
-
+      
         return(
             <div className="allinbisetion" >
+                
                 <div className="in_box">
                     <h2>Bisection Method</h2>
                     <div>
@@ -89,6 +91,7 @@ class Bisection extends React.Component{
                         <span className="PoomBisec"><Button type="primary" onClick={this.show_value} >Calculate</Button></span>
                     </div>
                     <div>
+                        
                         <span className="Text_Input_2"> XL : </span>
                         <span><Input placeholder="1.5" onChange={this.getXL} className="Input_2"/></span>
                         <span className="Text_Input_2"> XR : </span>
