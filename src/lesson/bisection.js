@@ -82,26 +82,25 @@ class Bisection extends React.Component{
       
         return(
             <div className="allinbisetion" >
-                
-                <div className="in_box">
-                    <h2>Bisection Method</h2>
+                <h1 className ="Ontop">Bisection Method</h1>
+            
                     <div>
-                        <span>F(x) :</span>
-                        <span><Input placeholder="x^4-13" onChange={this.getEquation} className="Input_2"/></span>
-                        <span className="PoomBisec"><Button type="primary" onClick={this.show_value} >Calculate</Button></span>
+                        <span>F(x) =</span>
+                        <span><Input placeholder="x^4-13" onChange={this.getEquation} className="Input_1"/></span>
                     </div>
                     <div>
-                        
                         <span className="Text_Input_2"> XL : </span>
                         <span><Input placeholder="1.5" onChange={this.getXL} className="Input_2"/></span>
                         <span className="Text_Input_2"> XR : </span>
                         <span><Input placeholder="2.0" onChange={this.getXR} className="Input_2"/></span>
                         <span className="Text_Input_2"> ERROR : </span>
-                        <span><Input placeholder="0.000001" onChange={this.getERR} className="Input_2"/></span>
+                        <span><Input placeholder="0.000001" onChange={this.getERR} className="Input_3"/></span>
+                        <span className="Poom"><Button type="primary" onClick={this.show_value} >Calculate</Button></span>
                     </div>
+                    
                     {this.state.result}
                 </div>
-            </div>
+    
 
         );
     }

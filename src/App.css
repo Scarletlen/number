@@ -44,12 +44,25 @@
 }
 
 .site-layout .site-layout-background {
-  background: #fff;
+  background:gainsboro;
+}
+.Ontop{
+  font-size: calc(10px + 2vmin);
+}
+.Input_1{
+  width: 15%;
 }
 .Input_2{
-  width: 15%;
+  width: 4%;
   margin-top: 15px;
 }
-.PoomBisec{
+.Input_3{
+  width: 7%;
+}
+.Poom{
   margin-left: 10px;
+}
+.AllButton{
+  margin-top: 15px;
+  margin-left: 10%;
 }
