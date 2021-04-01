@@ -26,7 +26,7 @@
 }
 
 .App-link {
-  color: #61dafb;
+  color:mediumvioletred;
 }
 
 @keyframes App-logo-spin {
@@ -51,18 +51,19 @@
 }
 .Input_1{
   width: 15%;
+  border-radius: 10px;
 }
 .Input_2{
   width: 4%;
   margin-top: 15px;
+  border-radius: 10px;
 }
 .Input_3{
   width: 7%;
+  border-radius: 10px;
 }
 .Poom{
   margin-left: 10px;
-}
-.AllButton{
-  margin-top: 15px;
-  margin-left: 10%;
+  border-radius: 10px;
+  color:aquamarine;
 }

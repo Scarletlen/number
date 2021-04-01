@@ -95,7 +95,7 @@ class Bisection extends React.Component{
                         <span><Input placeholder="2.0" onChange={this.getXR} className="Input_2"/></span>
                         <span className="Text_Input_2"> ERROR : </span>
                         <span><Input placeholder="0.000001" onChange={this.getERR} className="Input_3"/></span>
-                        <span className="Poom"><Button type="primary" onClick={this.show_value} >Calculate</Button></span>
+                        <span className="Poom"><Button type="primary" onClick={this.show_value} >คำนวน</Button></span>
                     </div>
                     
                     {this.state.result}
