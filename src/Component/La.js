@@ -12,7 +12,7 @@ import GaussJor from '../lesson/gaussjor';
 import LUdecom from '../lesson/lude';
 import { Route } from "react-router-dom";
 import { HashRouter } from 'react-router-dom';
-import { Link } from "react-router-dom";
+import { Link,Redirect } from "react-router-dom";
 
 const {Content , Sider } = Layout;
 const { SubMenu } = Menu;
@@ -31,6 +31,7 @@ class La extends React.Component {
     const { collapsed } = this.state;
     return (
       <HashRouter>
+
         <div>
           <Layout style={{ minHeight: '100vh' }}>
             <Sider collapsible collapsed={collapsed} onCollapse={this.onCollapse}>
@@ -57,6 +58,7 @@ class La extends React.Component {
              
               <Content >
                 <div className="site-layout-background" style={{ padding: 24, minHeight: 360 }}>
+                  {<Redirect exact from="/" to="/bisection" />}
                   {<Route path='/Bisection' component={Bisec}></Route>}
                   {<Route path= '/Falseposition' component={Falsepo}></Route>}
                   {<Route path= '/Onepoint' component={ONepoint}></Route>}

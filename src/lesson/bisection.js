@@ -1,7 +1,7 @@
 import React from 'react';
 import { Input } from 'antd';
 import { Button } from 'antd';
-
+import {bisectioncal} from "../Component/calculate"
 
 
 class Bisection extends React.Component{
@@ -41,42 +41,12 @@ class Bisection extends React.Component{
     };
 
     show_value = (e) =>{
-
-        const Parser = require('expr-eval').Parser; // ฟั่งชั้นแปลงสมการ
-        let i = 1;
-        let arr = [];
-
-        let Equation = this.state.Equation;
-        let XL = this.state.XL;
-        XL = parseFloat(XL);
-        let XR = this.state.XR;
-        XR = parseFloat(XR);
-        let ERROR = this.state.ERROR;
-        ERROR = parseFloat(ERROR);
-
-        let Xmid = (XL+XR)/2;
-        let XM = 0;
-        let errer_sum = 1;
-
-        var expression = Parser.parse(Equation);
-        let result = expression.evaluate({ x: Xmid }) * expression.evaluate({ x: XR });
-
-        (result < 0) ? (XL = Xmid) : XR = Xmid;
-
-        while(errer_sum > ERROR){
-            XM = (XL+XR)/2;
-
-            result = expression.evaluate({ x: XM }) * expression.evaluate({ x: XR });
-
-            (result < 0) ? (XL = XM) : (XR = XM);
-
-            errer_sum = Math.abs((XM-Xmid)/XM);
-            Xmid = XM;
-            arr.push(<div className='result' key={i}>Iteration {i} : {XM}</div>);
-            i = i+1;
-        }
-        this.setState({result: arr})
+        this.setState(
+            {result: bisectioncal(this.state.XL,this.state.XR,this.state.ERROR,this.state.Equation)}
+        );
     }
+
+        
 
     render(){
       
@@ -97,8 +67,10 @@ class Bisection extends React.Component{
                         <span><Input placeholder="0.000001" onChange={this.getERR} className="Input_3"/></span>
                         <span className="Poom"><Button type="primary" onClick={this.show_value} >คำนวน</Button></span>
                     </div>
+                    <div>
+                        {this.state.result}
+                    </div>
                     
-                    {this.state.result}
                 </div>
     
 
