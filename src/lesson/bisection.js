@@ -11,7 +11,7 @@ class Bisection extends React.Component{
         XL: '1.5',
         XR: '2.0',
         ERROR: '0.000001',
-        result: '',
+        result: ''
       };
      
 
