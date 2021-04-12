@@ -1,6 +1,7 @@
 import React from 'react';
-import { Input, Row ,Button,Col  } from 'antd';
+import {  Row ,Button,Col  } from 'antd';
 import {MatrixInputA, MatrixInputB} from '../Component/matrixinput'
+
 class Cremeru extends React.Component{
     
     state = 
@@ -38,18 +39,30 @@ class Cremeru extends React.Component{
                 this.setState({n:this.state.n-1})
             } 
         }
+        
+        onPoom = e =>{
+
+        }
     render(){
         return(
             <div className ="CramerRule">
-                <h1 className ="ontop"></h1>
+                <h1 className ="ontop">Cramer Rule</h1>
+                <Button onClick={this.onClickDel}>Del</Button>{this.state.n} x {this.state.n}<Button onClick={this.onClickAdd}>Add</Button>
                 <Row>
-                    <Col span={22}>
+                    <Col span ='6'>
                         <MatrixInputA n={this.state.n} onChange={this.OnChangeMatrixA} value={this.state.matrixA}/>
                     </Col>
-                    <Col span={2}>
+                    <Col>
+                    
+                    </Col>
+                    <Col >
                         <MatrixInputB n={this.state.n} onChange={this.OnChangeMatrixB} value={this.state.matrixB}/>
                     </Col>
+                    <span className="Poom"><Button type="primary" >Calculate</Button></span>
                 </Row>
+                <div>
+                
+                </div>
             </div>
             
         );
