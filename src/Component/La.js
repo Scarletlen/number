@@ -10,6 +10,9 @@ import Cramers from '../lesson/cramerru';
 import GaussEli from '../lesson/gausseli';
 import GaussJor from '../lesson/gaussjor';
 import LUdecom from '../lesson/lude';
+import Conju from '../lesson/conjugate';
+import Gaussseidel from '../lesson/gaussseidel';
+import Jacobi from '../lesson/jacobi';
 import { Route } from "react-router-dom";
 import { HashRouter } from 'react-router-dom';
 import { Link,Redirect } from "react-router-dom";
@@ -40,17 +43,21 @@ class La extends React.Component {
                 <SubMenu key="sub1" title="Root of equations">
                   <Menu.Item key="3">Bisection Method{<Link to='/Bisection'></Link>}</Menu.Item>
                   <Menu.Item key="4">Falseposition Method{<Link to='/FalsePosition'></Link>}</Menu.Item>
-                  <Menu.Item key="5">Onepoint Method{<Link to='/Onepoint'></Link>}</Menu.Item>
+                  <Menu.Item key="5">Onepoint Iteration Method{<Link to='/Onepoint'></Link>}</Menu.Item>
                   <Menu.Item key="6">Newton Raphson{<Link to='/NewtonRaphson'></Link>}</Menu.Item>
                   <Menu.Item key="8">Secant{<Link to='/Secant'></Link>}</Menu.Item>
                 </SubMenu>
                 <SubMenu key="sub2" title="Martrix">
-                  <Menu.Item key="9">Cramer's Rule{<Link to='/CramerRule'></Link>}</Menu.Item>
-                  <Menu.Item key="10">Gauss Elimination Method{<Link to='/GaussElimination'></Link>}</Menu.Item>
-                  <Menu.Item key="11">Gauss Jordan Method{<Link to='/GaussJordan'></Link>}</Menu.Item>
-                  <Menu.Item key="8">LU Decomposition Method{<Link to='/LUDecomposition'></Link>}</Menu.Item>
+                  <Menu.Item key="9">LU Decomposition Method{<Link to='/LUDecomposition'></Link>}</Menu.Item>
+                  <Menu.Item key="10">Cramer's Rule{<Link to='/CramerRule'></Link>}</Menu.Item>
+                  <Menu.Item key="11">Gauss Elimination Method{<Link to='/GaussElimination'></Link>}</Menu.Item>
+                  <Menu.Item key="12">Gauss Jordan Method{<Link to='/GaussJordan'></Link>}</Menu.Item>
+                  <Menu.Item key="13">Jacobi Iteration Method{<Link to='/Jacobi'></Link>}</Menu.Item>
+                  <Menu.Item key="14">Gauss-Seidel Iteration{<Link to='/Gaunssseicon'></Link>}</Menu.Item>
+                  <Menu.Item key="15">Conjugate Gradient Method{<Link to='/Conjugatecon'></Link>}</Menu.Item>
 
                 </SubMenu>
+               
               </Menu>
             </Sider>
             <Layout className="site-layout">
@@ -68,6 +75,9 @@ class La extends React.Component {
                   {<Route path= '/GaussElimination' component={GaussEli}></Route>}
                   {<Route path= '/GaussJordan' component={GaussJor}></Route>}
                   {<Route path= '/LUDecomposition' component={LUdecom}></Route>}
+                  {<Route path= '/Jacobi' component = {Jacobi}></Route>}
+                  {<Route path= '/Gaunssseicon' component ={Gaussseidel}></Route>}
+                  {<Route path= '/Conjugatecon' component ={Conju}></Route>}
                 </div>
               </Content>
             </Layout>

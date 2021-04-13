@@ -2,7 +2,7 @@ import React from 'react'
 import {  Row ,Button,Col  } from 'antd';
 import {MatrixInputA, MatrixInputB} from '../Component/matrixinput'
 
-class Gaussjor extends React.Component{
+class Jacobi extends React.Component{
     state = 
     {
         n: 2,
@@ -38,10 +38,15 @@ class Gaussjor extends React.Component{
                 this.setState({n:this.state.n-1})
             } 
         }
+        
+        onPoom = e =>{
+            
+        }
     render(){
+
         return(
-            <div className="gaussjorui">
-                <h1 className ="Ontop">Gauss-Jordan Method</h1>
+            <div className="jacobicname">
+                <h1 className ="Ontop">Jacobi-Iteration Method</h1>
                 <Button onClick={this.onClickDel}>Del</Button>{this.state.n} x {this.state.n}<Button onClick={this.onClickAdd}>Add</Button>
                 <Row>
                     <Col span ='6'>
@@ -53,13 +58,15 @@ class Gaussjor extends React.Component{
                     <Col >
                         <MatrixInputB n={this.state.n} onChange={this.OnChangeMatrixB} value={this.state.matrixB}/>
                     </Col>
-                    <span className="Poom"><Button type="primary" >Calculate</Button></span>
+                    <span className="Poom"><Button type="primary" onClick ={this.onPoom}>Calculate</Button></span>
                 </Row>
                 <div>
                 
                 </div>
             </div>
-        );
+        )
     }
+
 }
-export default Gaussjor
+
+export default Jacobi

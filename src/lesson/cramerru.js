@@ -41,12 +41,12 @@ class Cremeru extends React.Component{
         }
         
         onPoom = e =>{
-
+            
         }
     render(){
         return(
             <div className ="CramerRule">
-                <h1 className ="ontop">Cramer Rule</h1>
+                <h1 className ="Ontop">Cramer Rule</h1>
                 <Button onClick={this.onClickDel}>Del</Button>{this.state.n} x {this.state.n}<Button onClick={this.onClickAdd}>Add</Button>
                 <Row>
                     <Col span ='6'>
@@ -58,7 +58,7 @@ class Cremeru extends React.Component{
                     <Col >
                         <MatrixInputB n={this.state.n} onChange={this.OnChangeMatrixB} value={this.state.matrixB}/>
                     </Col>
-                    <span className="Poom"><Button type="primary" >Calculate</Button></span>
+                    <span className="Poom"><Button type="primary" onClick ={this.onPoom}>Calculate</Button></span>
                 </Row>
                 <div>
                 

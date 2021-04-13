@@ -40,7 +40,7 @@ class Lude extends React.Component{
     render(){
         return(
             <div className="ludeui">
-                <h1 className ="ontop">Gauss Elimination Method</h1>
+                <h1 className ="Ontop">Gauss Elimination Method</h1>
                 <Button onClick={this.onClickDel}>Del</Button>{this.state.n} x {this.state.n}<Button onClick={this.onClickAdd}>Add</Button>
                 <Row>
                     <Col span ='6'>

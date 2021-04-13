@@ -25,7 +25,7 @@ class Onepoint extends React.Component{
     render(){
         return(
             <div className= 'onepointui'>
-                <h1 className="Ontop">Onepoint Method</h1>
+                <h1 className="Ontop">Onepoint Iteration Method</h1>
                 <div>
                         <span>F(x) =</span>
                         <span><Input placeholder="(-0.6*x)+0.8"  className="Input_1" onChange ={this.getEqation}/></span>
