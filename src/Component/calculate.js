@@ -678,5 +678,5 @@ export function calConjugate(n, initialMatrix1, initialMatrix2,initialError) {
 
         
     return arr
-}
+    }
 }
