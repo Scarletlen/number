@@ -1,6 +1,7 @@
 import React from 'react'
-import {  Row ,Button,Col  } from 'antd';
+import {  Row ,Button,Col,Input  } from 'antd';
 import {MatrixInputA, MatrixInputB} from '../Component/matrixinput'
+import {calConjugate} from '../Component/calculate'
 
 class Conju extends React.Component{
      
@@ -9,6 +10,8 @@ class Conju extends React.Component{
         n: 2,
         matrixA : [[],[]],
         matrixB : [],
+        result : "",
+        ERROR : ""
     }
         OnChangeMatrixA = e =>{
             let changedArr = this.state.matrixA
@@ -40,8 +43,16 @@ class Conju extends React.Component{
             } 
         }
         
+        getERR= (e) => {
+            this.setState({
+                ERROR: e.target.value,
+            })
+        }
+        
         onPoom = e =>{
-            
+            this.setState({
+                result : calConjugate(this.state.n,this.state.matrixA,this.state.matrixB,this.state.ERROR)
+            })
         }
     render(){
 
@@ -59,11 +70,14 @@ class Conju extends React.Component{
                     <Col >
                         <MatrixInputB n={this.state.n} onChange={this.OnChangeMatrixB} value={this.state.matrixB}/>
                     </Col>
-                    <span className="Poom"><Button type="primary" onClick ={this.onPoom}>Calculate</Button></span>
+
                 </Row>
+                <span><Input placeholder="0.000001" onChange={this.getERR} className="Input_3"/></span>
+                <span className="Poom"><Button type="primary" onClick ={this.onPoom}>Calculate</Button></span>
                 <div>
-                
+                    {this.state.result}
                 </div>
+                
 
            </div>
        )

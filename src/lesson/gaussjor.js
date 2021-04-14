@@ -1,6 +1,7 @@
 import React from 'react'
 import {  Row ,Button,Col  } from 'antd';
 import {MatrixInputA, MatrixInputB} from '../Component/matrixinput'
+import {Jordancal} from '../Component/calculate'
 
 class Gaussjor extends React.Component{
     state = 
@@ -8,6 +9,7 @@ class Gaussjor extends React.Component{
         n: 2,
         matrixA : [[],[]],
         matrixB : [],
+        result : ""
     }
         OnChangeMatrixA = e =>{
             let changedArr = this.state.matrixA
@@ -38,6 +40,11 @@ class Gaussjor extends React.Component{
                 this.setState({n:this.state.n-1})
             } 
         }
+        onCal = e =>{
+            this.setState({
+                result : Jordancal(this.state.n,this.state.matrixA,this.state.matrixB)
+            })
+        }
     render(){
         return(
             <div className="gaussjorui">
@@ -53,10 +60,10 @@ class Gaussjor extends React.Component{
                     <Col >
                         <MatrixInputB n={this.state.n} onChange={this.OnChangeMatrixB} value={this.state.matrixB}/>
                     </Col>
-                    <span className="Poom"><Button type="primary" >Calculate</Button></span>
+                    <span className="Poom"><Button type="primary" onClick = {this.onCal}>Calculate</Button></span>
                 </Row>
                 <div>
-                
+                    {this.state.result}
                 </div>
             </div>
         );

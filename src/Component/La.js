@@ -48,10 +48,12 @@ class La extends React.Component {
                   <Menu.Item key="8">Secant{<Link to='/Secant'></Link>}</Menu.Item>
                 </SubMenu>
                 <SubMenu key="sub2" title="Martrix">
-                  <Menu.Item key="9">LU Decomposition Method{<Link to='/LUDecomposition'></Link>}</Menu.Item>
-                  <Menu.Item key="10">Cramer's Rule{<Link to='/CramerRule'></Link>}</Menu.Item>
-                  <Menu.Item key="11">Gauss Elimination Method{<Link to='/GaussElimination'></Link>}</Menu.Item>
-                  <Menu.Item key="12">Gauss Jordan Method{<Link to='/GaussJordan'></Link>}</Menu.Item>
+                  <Menu.Item key="9">Cramer's Rule{<Link to='/CramerRule'></Link>}</Menu.Item>
+                  <Menu.Item key="10">Gauss Elimination Method{<Link to='/GaussElimination'></Link>}</Menu.Item>
+                  <Menu.Item key="11">Gauss Jordan Method{<Link to='/GaussJordan'></Link>}</Menu.Item>
+                  <Menu.Item key="12">LU Decomposition Method{<Link to='/LUDecomposition'></Link>}</Menu.Item>  
+                  
+                  
                   <Menu.Item key="13">Jacobi Iteration Method{<Link to='/Jacobi'></Link>}</Menu.Item>
                   <Menu.Item key="14">Gauss-Seidel Iteration{<Link to='/Gaunssseicon'></Link>}</Menu.Item>
                   <Menu.Item key="15">Conjugate Gradient Method{<Link to='/Conjugatecon'></Link>}</Menu.Item>

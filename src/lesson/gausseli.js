@@ -1,13 +1,14 @@
 import React from 'react'
 import {  Row ,Button,Col  } from 'antd';
 import {MatrixInputA, MatrixInputB} from '../Component/matrixinput'
-
+import {Eliminationcal} from '../Component/calculate'
 class Gausseli extends React.Component{
     state = 
     {
         n: 2,
         matrixA : [[],[]],
         matrixB : [],
+        result : ""
     }
         OnChangeMatrixA = e =>{
             let changedArr = this.state.matrixA
@@ -38,6 +39,11 @@ class Gausseli extends React.Component{
                 this.setState({n:this.state.n-1})
             } 
         }
+        onCal = e =>{
+            this.setState({
+                result : Eliminationcal(this.state.n,this.state.matrixA,this.state.matrixB)
+            })
+        }
     render(){
         return(
             <div className="gausseliui">
@@ -53,10 +59,10 @@ class Gausseli extends React.Component{
                     <Col >
                         <MatrixInputB n={this.state.n} onChange={this.OnChangeMatrixB} value={this.state.matrixB}/>
                     </Col>
-                    <span className="Poom"><Button type="primary" >Calculate</Button></span>
+                    <span className="Poom"><Button type="primary" onClick = {this.onCal}>Calculate</Button></span>
                 </Row>
                 <div>
-                
+                    {this.state.result}
                 </div>
             
             </div>

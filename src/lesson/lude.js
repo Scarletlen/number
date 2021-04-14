@@ -1,12 +1,15 @@
 import React from 'react'
-import {  Row ,Button,Col  } from 'antd';
+import {  Row ,Button,Col , } from 'antd';
 import {MatrixInputA, MatrixInputB} from '../Component/matrixinput'
+import {LUcal} from '../Component/calculate'
+ 
 class Lude extends React.Component{
     state = 
     {
         n: 2,
         matrixA : [[],[]],
         matrixB : [],
+        result : ""
     }
         OnChangeMatrixA = e =>{
             let changedArr = this.state.matrixA
@@ -37,10 +40,16 @@ class Lude extends React.Component{
                 this.setState({n:this.state.n-1})
             } 
         }
+
+        oncal = e =>{
+            this.setState({
+                result : LUcal(this.state.n,this.state.matrixA,this.state.matrixB)
+            })
+        }
     render(){
         return(
             <div className="ludeui">
-                <h1 className ="Ontop">Gauss Elimination Method</h1>
+                <h1 className ="Ontop">LU-Decompocition Method</h1>
                 <Button onClick={this.onClickDel}>Del</Button>{this.state.n} x {this.state.n}<Button onClick={this.onClickAdd}>Add</Button>
                 <Row>
                     <Col span ='6'>
@@ -52,10 +61,10 @@ class Lude extends React.Component{
                     <Col >
                         <MatrixInputB n={this.state.n} onChange={this.OnChangeMatrixB} value={this.state.matrixB}/>
                     </Col>
-                    <span className="Poom"><Button type="primary" >Calculate</Button></span>
+                    <span className="Poom"><Button type="primary" onClick = {this.oncal}>Calculate</Button></span>
                 </Row>
                 <div>
-                
+                    {this.state.result}
                 </div>
             </div>
         );

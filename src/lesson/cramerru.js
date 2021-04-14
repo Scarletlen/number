@@ -1,7 +1,7 @@
 import React from 'react';
 import {  Row ,Button,Col  } from 'antd';
 import {MatrixInputA, MatrixInputB} from '../Component/matrixinput'
-
+import {Cramercal} from '../Component/calculate'
 class Cremeru extends React.Component{
     
     state = 
@@ -9,6 +9,7 @@ class Cremeru extends React.Component{
         n: 2,
         matrixA : [[],[]],
         matrixB : [],
+        result : ""
     }
         OnChangeMatrixA = e =>{
             let changedArr = this.state.matrixA
@@ -41,7 +42,9 @@ class Cremeru extends React.Component{
         }
         
         onPoom = e =>{
-            
+            this.setState({
+                result : Cramercal(this.state.n,this.state.matrixA,this.state.matrixB)
+            });
         }
     render(){
         return(
@@ -61,7 +64,7 @@ class Cremeru extends React.Component{
                     <span className="Poom"><Button type="primary" onClick ={this.onPoom}>Calculate</Button></span>
                 </Row>
                 <div>
-                
+                    {this.state.result}
                 </div>
             </div>
             
@@ -72,3 +75,4 @@ class Cremeru extends React.Component{
 
 }
 export default Cremeru
+

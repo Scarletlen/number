@@ -4,6 +4,15 @@ function Xtox (equation){
 
     return equation
 }
+function copyArray(n,matrix1){
+    let arr = []
+     for(let i = 0;i < n ; i++){
+         arr.push([])
+         arr[i] = [].concat(matrix1[i])
+     }
+     return arr;
+ 
+ }
 export function bisectioncal( init_xl, init_xr, init_error,init_fx) {
     init_fx=Xtox(init_fx);
     let fx = math.parse(init_fx).compile()
@@ -36,7 +45,7 @@ export function bisectioncal( init_xl, init_xr, init_error,init_fx) {
         }
         checkError = math.abs(math.divide(math.subtract(newXm, xm), newXm))
         xm = newXm
-        data.push(<div> {iteration}: {xm.toFixed(15).toString()}</div>)
+        data.push(<div> {iteration}: {xm.toFixed(15).toString()}  ERROR: {math.fix(checkError, 16).toString()}</div>)
         //data.push({key:iteration, iteration:iteration, x:xm.toString(), error:math.fix(checkError, 16).toString()})
         iteration = iteration + 1
     }
@@ -218,7 +227,7 @@ export function Secantcal(initialEquation, initialX0,initialX1, initialError) {
         }
         oldcheckError = checkError;
 
-        oldX = x
+        
 
         arr.push(<div>iteration: {i.toString()} x: {x.toFixed(15).toString()} error: {checkError.toFixed(15).toString()}</div>)
        
@@ -227,4 +236,447 @@ export function Secantcal(initialEquation, initialX0,initialX1, initialError) {
     }
     
     return arr
+}
+
+export function Cramercal(n, initialMatrix1, initialMatrix2) {
+
+    let matrix1=math.bignumber(initialMatrix1)
+    let matrix2=math.bignumber(initialMatrix2)
+    let det_matrixA = math.det(matrix1)
+    
+    let temp_matrix1 = copyArray(n,matrix1)
+
+    let arr = []
+
+    let X = [];
+    
+    
+
+
+        for (let i = 0; i < n; i++) { 
+
+            for (let j = 0; j < n; j++) { 
+                temp_matrix1[j][i] = matrix2[j]  
+            }
+            X[i] = math.divide(math.det(temp_matrix1) , det_matrixA).toFixed(15).toString()
+            
+            //arr.push({key : i , x : 'X'+(i+1) ,valuex : X[i]})
+            arr.push(<div> X{i+1} = {X[i]}</div>)
+
+            temp_matrix1 = copyArray(n,matrix1);
+        }
+        
+    return arr
+}
+
+export function Eliminationcal(n, initialMatrix1, initialMatrix2) {
+
+    let matrix1=initialMatrix1
+    let matrix2=initialMatrix2
+    
+    
+    
+    let arr = []
+    let X = []
+    
+    for(let i = 0 ; i < n ; i++){
+        matrix1[i].push(matrix2[i]) 
+        X.push(1)
+    }
+    console.log(matrix1)
+   
+    for(let i = 1;i < n ; i++){
+        for(let j = i ;j < n ; j++){
+
+            let divide = matrix1[i-1][i-1]
+            let multi = matrix1[j][i-1]
+
+            for(let k = i-1 ; k < n+1;k++){
+                matrix1[j][k] = matrix1[j][k] - ((matrix1[i-1][k]/divide)*multi)
+                
+            }
+    
+        }
+         
+    }
+
+    for(let i = n-1 ;i >= 0 ; i--){
+        let sum = 0;
+        for(let j = 0 ; j < n ;j++){
+            sum = sum + matrix1[i][j]*X[j];
+        }
+        sum = sum - matrix1[i][i]
+        X[i] = ((matrix1[i][n] - sum)/matrix1[i][i])
+        
+    }
+   // X.map((x,i) => arr.push({key : i , x : 'X'+(i+1) , valuex : x.toFixed(5)}))
+    X.map((x,i) => arr.push(<div>x{i+1}= {x.toFixed(15)}</div>))
+
+        
+    return arr
+}
+
+export function Jordancal(n, initialMatrix1, initialMatrix2) {
+
+    let matrix1=initialMatrix1
+    let matrix2=initialMatrix2
+    
+    
+    
+    let arr = []
+    let X = []
+    
+    for(let i = 0 ; i < n ; i++){
+        matrix1[i].push(matrix2[i]) 
+        X.push(1)
+    }
+    console.log(matrix1)
+   
+    for(let i = 1;i < n ; i++){
+        for(let j = i ;j < n ; j++){
+
+            let divide = matrix1[i-1][i-1]
+            let multi = matrix1[j][i-1]
+
+            for(let k = i-1 ; k < n+1;k++){
+                matrix1[j][k] = matrix1[j][k] - ((matrix1[i-1][k]/divide)*multi)
+              
+            }
+    
+        }
+         
+    }
+    for(let i = n-2;i >= 0 ; i--){
+        for(let j = i ;j >= 0 ; j--){
+
+            let divide = matrix1[i+1][i+1]
+            let multi = matrix1[j][i+1]
+
+            for(let k = n ; k >= i;k--){
+                matrix1[j][k] = matrix1[j][k] - ((matrix1[i+1][k]/divide)*multi)
+              
+            }
+    
+        }
+         
+    }
+
+    for(let i = 0 ;i < n ; i++){
+        X[i] = ((matrix1[i][n] )/matrix1[i][i])
+    }
+       
+      
+        
+    
+    //X.map((x,i) => arr.push({key : i , x : 'X'+(i+1) , valuex : x.toFixed(5)}))
+    X.map((x,i) => arr.push(<div>x{i+1}= {x.toFixed(15)}</div>))
+
+        
+    return arr
+}
+
+export function LUcal(n, initialMatrix1, initialMatrix2) {
+
+    let A = initialMatrix1
+    let B = initialMatrix2
+  
+    let arr = []
+    let U = []
+    let L = []
+    let Y = []
+    let X = []
+    
+    for (let i = 0; i < n; i++) {
+            U.push([])
+            L.push([])
+            Y.push(1)
+            X.push(1)
+        for (let j = 0; j < n; j++) {
+            L[i][j]=0
+            if(i == j){
+                U[i][j]= 1
+            }
+            else{
+                
+                U[i][j]=0
+            }
+               
+        }
+    }
+ 
+    
+    for (let i = 0; i < n; i++) {
+
+        for (let j = 0; j < n; j++) {
+
+            let sum = 0
+
+            for (let k = 0; k < n; k++) {
+
+
+                if (k != j || i < j) {
+                    sum += L[i][k] * U[k][j]
+                }
+
+
+            }
+            if (i >= j) {
+                sum = A[i][j] - sum;
+                L[i][j] = sum;
+            }
+            else {
+                sum = A[i][j] - sum;
+                U[i][j] = sum / L[i][i];
+            }
+        }
+    }
+   
+    
+    for (let i = 0; i < n; i++) {
+        let sum = 0;
+        for (let j = 0; j < n; j++) {
+
+            sum += L[i][j] * Y[j];
+        }
+        sum = sum - L[i][i] * Y[i];
+
+        Y[i] = ((B[i] - sum) / L[i][i])
+        
+    }
+    for (let i = n-1; i >= 0; i--) {
+        let sum = 0;
+        for (let j = 0; j < n; j++) {
+
+            sum += U[i][j] * X[j];
+        }
+        sum = sum - U[i][i] * X[i];
+
+        X[i] = ((Y[i] - sum) / U[i][i])
+
+    }
+    
+  
+    //X.map((x, i) => arr.push({ key: i, x: 'X' + (i + 1), valuex: x.toFixed(5) }))
+    X.map((x,i) => arr.push(<div>x{i+1}= {x.toFixed(15)}</div>))
+
+    return arr
+}
+
+export function Jacobical(n, initialMatrix1, initialMatrix2,initialError) {
+    //รอแก้
+    let check = true;
+    let matrix1=initialMatrix1
+    let matrix2=initialMatrix2
+    let error = initialError
+    let arr = []
+    
+    let resultX = []
+    let ansX = []
+    
+    let arr_Error = []
+    for(let i = 0 ; i < n ;i++){
+        resultX.push(0)
+        
+    }
+    
+    while(check){
+        for(let i = 0;i <  n ;i++){
+            let sum = matrix2[i]
+            for(let j = 0;j < n;j++){
+                if(i != j){
+                    
+                   
+                    sum = (sum- (matrix1[i][j]*resultX[j]))
+                    
+                    
+                    
+                }
+                
+            }
+            
+            
+            ansX[i] = sum/matrix1[i][i];
+            arr_Error[i] = math.abs((ansX[i]-resultX[i])/ansX[i])
+            console.log(arr_Error[i]) 
+        }
+        resultX = [...ansX]
+        check = false
+        for(let i = 0 ; i < n ; i++){
+            if(arr_Error[i] > error){
+               check = true
+               break;
+            }
+          
+            
+        }
+       
+    
+    }
+    for(let i = 0 ; i < n ; i++){
+        //arr.push({key : i , x : 'X'+(i+1) , valuex : resultX[i].toFixed(5)})
+        arr.push(<div>X{i+1}={resultX[i].toFixed(15)}</div>)
+    }
+   
+    return arr
+}
+
+export function Seidelcal(n, initialMatrix1, initialMatrix2,initialError) {
+    //รอแก้
+    let check = true;
+    let matrix1=initialMatrix1
+    let matrix2=initialMatrix2
+    
+
+    let error = initialError
+
+    
+    let arr = []
+    
+    let resultX = []
+    let ansX = []
+    
+    let arr_Error = []
+    for(let i = 0 ; i < n ;i++){
+        resultX.push(0)
+        
+    }
+    
+    while(check){
+
+       
+        
+        
+        for(let i = 0;i <  n ;i++){
+            let sum = matrix2[i]
+            for(let j = 0;j < n;j++){
+                if(i != j){
+                    
+                   
+                    sum = (sum- (matrix1[i][j]*resultX[j]))
+                    
+                    
+                    
+                }
+                
+            }
+            
+            
+            ansX[i] = sum/matrix1[i][i];
+            
+            
+          
+            arr_Error[i] = math.abs((ansX[i]-resultX[i])/ansX[i])
+            resultX[i] = ansX[i]
+            //console.log(arr_Error[i])
+            
+           
+        }
+        resultX = [...ansX]
+        check = false
+        for(let i = 0 ; i < n ; i++){
+            if(arr_Error[i] > error){
+               check = true
+               break;
+            }
+          
+            
+        }
+       
+    
+    }
+    for(let i = 0 ; i < n ; i++){
+        //arr.push({key : i , x : 'X'+(i+1) , valuex : resultX[i].toFixed(5)})
+       
+        arr.push(<div>X{i+1}={resultX[i].toFixed(15)}</div>)
+    }
+     
+
+        
+    return arr
+}
+
+export function calConjugate(n, initialMatrix1, initialMatrix2,initialError) {
+
+    
+    let A = initialMatrix1
+
+    let B = initialMatrix2
+    
+    let error = initialError
+
+  
+    
+    let arr = []
+    
+    let X = []
+    
+    let K = 0;
+    
+    let checkError = 9999
+
+    for(let i = 0 ; i < n ;i++){
+       X.push(0)
+        
+    }
+    
+    let R = math.multiply(A,X);
+    R = math.subtract(R,B);
+    let D = math.multiply(R,-1);
+    
+    let lambda = null;
+
+    let alpha = null; 
+
+    while(checkError > error){
+
+        lambda = math.transpose(D);
+        let temp = lambda;
+        lambda = math.multiply(lambda, R);
+        temp = math.multiply(temp, A);
+        temp = math.multiply(temp, D);
+
+        lambda = lambda / temp;
+
+        lambda = math.multiply(lambda, -1);
+
+        temp = math.multiply(lambda, D);
+        X = math.add(X, temp);
+
+        temp = math.multiply(A, X);
+        R = math.subtract(temp, B);
+
+        temp = math.transpose(R);
+        temp = math.multiply(temp, R);
+
+        checkError = math.sqrt(temp);
+
+        alpha = math.transpose(R);
+        alpha = math.multiply(alpha, A);
+        alpha = math.multiply(alpha, D);
+
+        temp = math.transpose(D);
+        temp = math.multiply(temp, A);
+        temp = math.multiply(temp, D);
+
+        alpha = alpha / temp;
+
+        temp = math.multiply(alpha, D);
+        D = math.multiply(R, -1);
+        D = math.add(D, temp);
+
+       K++;
+         
+        
+        
+        
+      
+    for(let i = 0 ; i < n ; i++){
+        //arr.push({key : i , x : 'X'+(i+1) , valuex : X[i].toFixed(5)})
+        arr.push(<div>X{i+1}={X[i].toFixed(15)}</div>)
+    }
+     
+
+        
+    return arr
+}
 }
