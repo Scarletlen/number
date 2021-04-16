@@ -1,5 +1,6 @@
 const math=require("mathjs");
 var interpolationQuadratic_Poly_linear = require('interpolating-polynomial')
+const Spline = require('cubic-spline');
 function Xtox (equation){
     equation = equation.replaceAll('X','x')
 
@@ -722,7 +723,131 @@ export function calNewtonInterpolation( initialMatrix1, initialPoint,initialX) {
 
    
 
-    ans.push({key :  1 ,fx : 'f('+X+')' , valuex : findX(X) })
-
+    //ans.push({key :  1 ,fx : 'f('+X+')' , valuex : findX(X) })
+   ans.push(<div>f({X})={findX(X)}</div>)
    return ans
+}
+
+export function calLagrange(initialMatrix1,initialPoint,initialX){
+    
+
+    let A = initialMatrix1
+
+    let P = initialPoint
+   
+    let X = initialX
+
+    
+
+    let arr = []
+    let ans = []
+
+   
+   for(let i = 0 ; i < P.length ; i++){
+           arr.push(A[parseInt(P[i])-1])
+   }
+   console.log(arr)
+
+   //-----------------------------------------------------------//
+   let xs = []
+   let ys = []
+
+	for(let i = 0 ; i < arr.length ; i++){
+
+		for(let j = 0 ; j < arr.length ; j++){
+				if(j == 0){
+					xs.push(arr[i][j])
+				}
+				else if(j == 1){
+					ys.push(arr[i][j])
+				}
+		}
+			
+	}
+    console.log(xs.length)
+    console.log(ys.length)
+    //--------------------------------------------------------//
+    let ws = [];
+	let k = xs.length;
+	let w;
+	
+	for (let j = 0; j < k; ++j) {
+		w = 1;
+		for (var i = 0; i < k; ++i) {
+			if (i != j) {
+				w *= xs[j] - xs[i];
+			}
+		}
+		ws[j] = 1/w;
+	}
+ //-----------------------------------------------------------//
+    let a = 0;
+	let b = 0;
+	let c = 0;
+
+	for (let j = 0; j < xs.length; ++j) {
+		
+		if (X != xs[j]) {
+			
+			a = ws[j] / (X - xs[j]);
+			b += a * ys[j];
+			c += a;
+		} else {
+            ans.push({key :  1 ,fx : 'f('+X+')' , valuex : ys[j] })
+			return ans;
+            
+			
+		}
+	}
+	
+
+
+    //ans.push({key :  1 ,fx : 'f('+X+')' , valuex : (b/c).toFixed(5) })
+	ans.push(<div>f({X}) = {(b/c).toFixed(5)}</div>)
+    return ans
+}
+
+export function calSpline(initialMatrix1,initialX){
+    
+
+    let arr = initialMatrix1
+
+   
+   
+    let X = initialX
+
+    
+
+    
+    let ans = []
+
+  
+
+   //-----------------------------------------------------------//
+   let xs = []
+   let ys = []
+
+
+
+	for(let i = 0 ; i < arr.length ; i++){
+
+		for(let j = 0 ; j < arr.length ; j++){
+				if(j == 0){
+					xs.push(arr[i][j])
+				}
+				else if(j == 1){
+					ys.push(arr[i][j])
+				}
+		}
+			
+	}
+
+    const spline = new Spline(xs,ys)
+    
+
+    //ans.push({key :  1 ,fx : 'f('+X+')' , valuex : spline.at(X) })
+	ans.push(<div>F({X}) = {spline.at(X)}</div>)
+
+    return ans
+
 }

@@ -51,17 +51,17 @@
 }
 .Input_1{
   width: 15%;
-  border-radius: 10px;
+  border-radius: 5px;
 }
 .Input_2{
   width: 4%;
   margin-top: 15px;
-  border-radius: 10px;
+  border-radius: 5px;
 }
 .Input_3{
   margin-top: 10px;
   width: 7%;
-  border-radius: 10px;
+  border-radius: 5px;
 }
 .Poom{
   margin-left: 10px;
@@ -71,4 +71,19 @@
 .matrix-input{
   width: 50px;
   text-align: center;
+}
+.buttonmatrix {
+  margin-right: 5px;
+
+}
+.ant-btn-primary {
+  color: #fff;
+  background: #ff18b2;
+  border-color: #ff18b2;
+  text-shadow: 0 -1px 0 rgb(0 0 0 / 12%);
+  -webkit-box-shadow: 0 2px 0 rgb(0 0 0 / 5%);
+  box-shadow: 0 2px 0 rgb(0 0 0 / 5%);
+}
+.matrixip{
+  border-radius: 5px;
 }
