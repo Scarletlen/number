@@ -1,4 +1,5 @@
 const math=require("mathjs");
+var interpolationQuadratic_Poly_linear = require('interpolating-polynomial')
 function Xtox (equation){
     equation = equation.replaceAll('X','x')
 
@@ -13,6 +14,7 @@ function copyArray(n,matrix1){
      return arr;
  
  }
+
 export function bisectioncal( init_xl, init_xr, init_error,init_fx) {
     init_fx=Xtox(init_fx);
     let fx = math.parse(init_fx).compile()
@@ -464,10 +466,15 @@ export function LUcal(n, initialMatrix1, initialMatrix2) {
 
 export function Jacobical(n, initialMatrix1, initialMatrix2,initialError) {
     //รอแก้
+   
     let check = true;
     let matrix1=initialMatrix1
     let matrix2=initialMatrix2
+    
     let error = initialError
+
+  
+    
     let arr = []
     
     let resultX = []
@@ -480,6 +487,10 @@ export function Jacobical(n, initialMatrix1, initialMatrix2,initialError) {
     }
     
     while(check){
+
+       
+        
+        
         for(let i = 0;i <  n ;i++){
             let sum = matrix2[i]
             for(let j = 0;j < n;j++){
@@ -496,8 +507,14 @@ export function Jacobical(n, initialMatrix1, initialMatrix2,initialError) {
             
             
             ansX[i] = sum/matrix1[i][i];
+            
+            
+          
             arr_Error[i] = math.abs((ansX[i]-resultX[i])/ansX[i])
-            console.log(arr_Error[i]) 
+            
+            console.log(arr_Error[i])
+            
+           
         }
         resultX = [...ansX]
         check = false
@@ -516,7 +533,9 @@ export function Jacobical(n, initialMatrix1, initialMatrix2,initialError) {
         //arr.push({key : i , x : 'X'+(i+1) , valuex : resultX[i].toFixed(5)})
         arr.push(<div>X{i+1}={resultX[i].toFixed(15)}</div>)
     }
-   
+     
+
+        
     return arr
 }
 
@@ -679,4 +698,31 @@ export function calConjugate(n, initialMatrix1, initialMatrix2,initialError) {
         
     return arr
     }
+}
+
+export function calNewtonInterpolation( initialMatrix1, initialPoint,initialX) {
+    let A = initialMatrix1
+
+    let P = initialPoint
+   
+    let X = initialX
+
+    
+
+    let arr = []
+    let ans = []
+
+   
+   for(let i = 0 ; i < P.length ; i++){
+           arr.push(A[parseInt(P[i])-1])
+   }
+  
+   console.log(arr.toString())
+   let findX = interpolationQuadratic_Poly_linear(arr)
+
+   
+
+    ans.push({key :  1 ,fx : 'f('+X+')' , valuex : findX(X) })
+
+   return ans
 }

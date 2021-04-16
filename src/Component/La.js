@@ -13,6 +13,12 @@ import LUdecom from '../lesson/lude';
 import Conju from '../lesson/conjugate';
 import Gaussseidel from '../lesson/gaussseidel';
 import Jacobi from '../lesson/jacobi';
+import Newtondivide from '../lesson/newtondivide';
+import Lagrange from '../lesson/lagrangeRe';
+import Spline from '../lesson/spline';
+import LinearRe from '../lesson/lineregress';
+import Polynomial from '../lesson/polynomial';
+import Multiple from '../lesson/multiple';
 import { Route } from "react-router-dom";
 import { HashRouter } from 'react-router-dom';
 import { Link,Redirect } from "react-router-dom";
@@ -52,14 +58,20 @@ class La extends React.Component {
                   <Menu.Item key="10">Gauss Elimination Method{<Link to='/GaussElimination'></Link>}</Menu.Item>
                   <Menu.Item key="11">Gauss Jordan Method{<Link to='/GaussJordan'></Link>}</Menu.Item>
                   <Menu.Item key="12">LU Decomposition Method{<Link to='/LUDecomposition'></Link>}</Menu.Item>  
-                  
-                  
                   <Menu.Item key="13">Jacobi Iteration Method{<Link to='/Jacobi'></Link>}</Menu.Item>
                   <Menu.Item key="14">Gauss-Seidel Iteration{<Link to='/Gaunssseicon'></Link>}</Menu.Item>
                   <Menu.Item key="15">Conjugate Gradient Method{<Link to='/Conjugatecon'></Link>}</Menu.Item>
-
                 </SubMenu>
-               
+                <SubMenu key="sub3" title = "Interpolation">
+                  <Menu.Item key="16">Newton's divided-differences {<Link to='/Newtondivide'></Link>}</Menu.Item>
+                  <Menu.Item key="17">Lagrange polynomials {<Link to='/Lagrange'></Link>}</Menu.Item>
+                  <Menu.Item key="18">Spline interpolation {<Link to='/Spline'></Link>}</Menu.Item>
+                </SubMenu>
+                <SubMenu key="sub4" title ="Regression">
+                  <Menu.Item key="19">Linear Regression{<Link to='/LinearRe'></Link>}</Menu.Item>
+                  <Menu.Item key="20">Polynomial Regression {<Link to='/Polynomial'></Link>}</Menu.Item>
+                  <Menu.Item key="21">Multiple Linear Regression {<Link to='/Multiple'></Link>}</Menu.Item>
+                </SubMenu>
               </Menu>
             </Sider>
             <Layout className="site-layout">
@@ -80,6 +92,12 @@ class La extends React.Component {
                   {<Route path= '/Jacobi' component = {Jacobi}></Route>}
                   {<Route path= '/Gaunssseicon' component ={Gaussseidel}></Route>}
                   {<Route path= '/Conjugatecon' component ={Conju}></Route>}
+                  {<Route path='/Newtondivide' component={Newtondivide}></Route>}
+                  {<Route path ='/Lagrange' component={Lagrange}></Route>}
+                  {<Route path ='/Spline' component={Spline}></Route>}
+                  {<Route path ='/LinearRe' component={LinearRe}></Route>}
+                  {<Route path ='/Polynomial' component={Polynomial}></Route>}
+                  {<Route path ='/Multiple' component={Multiple}></Route>}
                 </div>
               </Content>
             </Layout>
