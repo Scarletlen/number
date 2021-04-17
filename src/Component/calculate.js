@@ -49,7 +49,7 @@ export function bisectioncal( init_xl, init_xr, init_error,init_fx) {
         }
         checkError = math.abs(math.divide(math.subtract(newXm, xm), newXm))
         xm = newXm
-        data.push(<div> {iteration}: {xm.toFixed(15).toString()}  ERROR: {math.fix(checkError, 16).toString()}</div>)
+        data.push(<div> {iteration}: {xm.toFixed(15).toString()}  ERROR: {math.fix(checkError, 16).toFixed(15).toString()}</div>)
         //data.push({key:iteration, iteration:iteration, x:xm.toString(), error:math.fix(checkError, 16).toString()})
         iteration = iteration + 1
     }
