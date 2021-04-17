@@ -1,6 +1,7 @@
 const math=require("mathjs");
 var interpolationQuadratic_Poly_linear = require('interpolating-polynomial')
 const Spline = require('cubic-spline');
+var regression = require('regression')
 function Xtox (equation){
     equation = equation.replaceAll('X','x')
 
@@ -685,20 +686,13 @@ export function calConjugate(n, initialMatrix1, initialMatrix2,initialError) {
         D = math.add(D, temp);
 
        K++;
-         
-        
-        
-        
-      
+    }
+       
     for(let i = 0 ; i < n ; i++){
         //arr.push({key : i , x : 'X'+(i+1) , valuex : X[i].toFixed(5)})
         arr.push(<div>X{i+1}={X[i].toFixed(15)}</div>)
-    }
-     
-
-        
+    }    
     return arr
-    }
 }
 
 export function calNewtonInterpolation( initialMatrix1, initialPoint,initialX) {
@@ -849,5 +843,209 @@ export function calSpline(initialMatrix1,initialX){
 	ans.push(<div>F({X}) = {spline.at(X)}</div>)
 
     return ans
+
+}
+
+export function calLinear(initialMatrix1,initialX){
+    
+    let arr = initialMatrix1
+    const result = regression.linear(arr);
+    let X = initialX
+    const gradient = parseFloat(result.equation[0]);
+    const yIntercept = parseFloat(result.equation[1]);
+    console.log(arr)
+    console.log(X)
+     console.log(gradient)
+     console.log(yIntercept)
+    let ans = []
+    //ans.push({key :  1 ,fx : 'f('+X+')' , valuex : (yIntercept + (gradient*X)).toFixed(5) })
+	ans.push(<div>f({X}) = {(yIntercept + (gradient*X)).toFixed(5)}</div>)
+
+    return ans
+
+}
+
+
+export function calPoly(initialMatrix1,initialX){
+    
+    let arr = initialMatrix1
+  
+    
+   
+    const result = regression.polynomial(arr);
+    let X = initialX
+    const a0 = parseFloat(result.equation[0]);
+    const a1 = parseFloat(result.equation[1]);
+    const a2 = parseFloat(result.equation[2]);
+    console.log(a0)
+    console.log(a1)
+    console.log(a2)
+
+    let ans = [] 
+    let fx = a0+(a1*X)+(a2*(X*X))
+    //ans.push({key :  1 ,fx : 'f('+X+')' , valuex : fx.toFixed(5) })
+    ans.push(<div>f({X}) = {fx.toFixed(5)}</div>)
+    return ans
+
+}
+
+export function calMultiple(initialN,initialMatrix1,initialX1,initialX2,initialX3){
+    
+    let n = initialN;
+    let X1 = initialX1
+    let X2 = initialX2
+    let X3 = initialX3
+    let A = initialMatrix1
+      let x1 = []
+      let x2 = []
+      let x3 = []
+      let y = []
+      let sumx1 = 0
+      let sumx2 = 0
+      let sumx3 = 0
+      let sumy  = 0
+      for(let i = 0; i < n ; i++){
+          for(let j = 0 ; j < 4 ; j++){
+              if(j == 0){
+                x1.push(A[i][j])
+                
+                 sumx1 +=  A[i][j]
+                
+              }
+              else if(j == 1){
+                x2.push(A[i][j])
+               
+                sumx2 +=  A[i][j]
+                
+              }
+              else if(j == 2){
+                x3.push(A[i][j])
+                 sumx3 +=  A[i][j]
+                
+              }
+              else if(j == 3){
+                y.push(A[i][j])
+                 sumy += A[i][j]
+               
+              }
+          }
+      }
+    
+       console.log(x1.toString())
+       console.log(x2.toString())
+       console.log(x3.toString())
+       console.log(y.toString())
+       console.log(sumx1)
+       console.log(sumx2)
+       console.log(sumx3)
+       console.log(sumy)
+      function cal(matrix1,matrix2){
+        let summ = 0
+        for(let i = 0 ; i< n ; i++){
+             summ += (matrix1[i]*matrix2[i])
+        }
+        return summ;
+      }
+    
+      let Xx = []
+      
+      Xx.push(x1)
+      Xx.push(x2)
+      Xx.push(x3)
+      Xx.push(y)
+      let arrSum = []
+      arrSum.push(sumx1)
+      arrSum.push(sumx2)
+      arrSum.push(sumx3)
+      arrSum.push(sumy)     
+    let B = []
+    
+    for (let i = 0; i < 4; i++) {
+      B.push([])
+      for (let j = 0; j < 4+1; j++) {
+        
+        if (i == 0 && j == 0) {
+          B[i][j] = 7
+        }
+        else if(i == 0){
+          
+           
+          
+            B[i][j] = arrSum[j-1]
+          
+         
+        }
+        else if(j == 0){
+          B[i][j] = arrSum[i-1]
+        }
+        else{
+          
+          
+            B[i][j] = cal(Xx[i-1], Xx[j-1])
+          
+         
+          
+        }
+        
+    
+    
+        }
+    
+      }
+      console.log(B)
+      
+
+      
+    let matrix1=B
+    
+    
+    
+    
+    let arr = []
+    let X = []
+    
+    for(let i = 0 ; i < 4 ; i++){
+       
+        X.push(1)
+    }
+    console.log(matrix1)
+   
+    for(let i = 1;i < 4 ; i++){
+        for(let j = i ;j < 4 ; j++){
+
+            let divide = matrix1[i-1][i-1]
+            let multi = matrix1[j][i-1]
+
+            for(let k = i-1 ; k < 4+1;k++){
+                matrix1[j][k] = matrix1[j][k] - ((matrix1[i-1][k]/divide)*multi)
+                
+            }
+    
+        }
+         
+    }
+
+    for(let i = 4-1 ;i >= 0 ; i--){
+        let sum = 0;
+        for(let j = 0 ; j < 4 ;j++){
+            sum = sum + matrix1[i][j]*X[j];
+        }
+        sum = sum - matrix1[i][i]
+        X[i] = ((matrix1[i][4] - sum)/matrix1[i][i])
+        
+    }
+    console.log(X[0])
+    console.log(X[1])
+    console.log(X[2])
+    console.log(X[3])
+
+    
+
+    let fX = X[0] + X[1]*X1+X[2]*X2+X[3]*X3
+
+    //arr.push({key :  1 ,fx : 'Y' , valuex : fX.toFixed(5) })
+    arr.push(<div>Y = {fX.toFixed(5)}</div>)
+    return arr
+
 
 }
