@@ -24,7 +24,7 @@ class Multiple extends React.Component {
     onChangematrixXY = (e) => {
         let index = e.target.name.split(" ")
         let value = e.target.value
-        this.state.matrixA[parseInt(index[0])][parseInt(index[1])] = parseInt(value)
+        this.state.matrixA[parseInt(index[0])][parseInt(index[1])] = (value)
 
 
 

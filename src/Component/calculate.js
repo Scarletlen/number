@@ -846,9 +846,15 @@ export function calSpline(initialMatrix1,initialX){
 
 }
 
-export function calLinear(initialMatrix1,initialX){
+export function calLinear(initialMatrix1,initialX,n){
     
     let arr = initialMatrix1
+    for(let i = 0 ; i < n ; i++){
+        for(let j = 0 ; j < 2 ; j ++){
+            arr[i][j] = parseInt(arr[i][j])
+        }
+    }
+
     const result = regression.linear(arr);
     let X = initialX
     const gradient = parseFloat(result.equation[0]);
@@ -858,6 +864,7 @@ export function calLinear(initialMatrix1,initialX){
      console.log(gradient)
      console.log(yIntercept)
     let ans = []
+    
     //ans.push({key :  1 ,fx : 'f('+X+')' , valuex : (yIntercept + (gradient*X)).toFixed(5) })
 	ans.push(<div>f({X}) = {(yIntercept + (gradient*X)).toFixed(5)}</div>)
 
@@ -866,10 +873,15 @@ export function calLinear(initialMatrix1,initialX){
 }
 
 
-export function calPoly(initialMatrix1,initialX){
+export function calPoly(initialMatrix1,initialX,n){
     
     let arr = initialMatrix1
-  
+    for(let i = 0 ; i < n ; i++){
+        for(let j = 0 ; j < 2 ; j ++){
+            arr[i][j] = parseInt(arr[i][j])
+        }
+    }
+
     
    
     const result = regression.polynomial(arr);
@@ -882,6 +894,7 @@ export function calPoly(initialMatrix1,initialX){
     console.log(a2)
 
     let ans = [] 
+    
     let fx = a0+(a1*X)+(a2*(X*X))
     //ans.push({key :  1 ,fx : 'f('+X+')' , valuex : fx.toFixed(5) })
     ans.push(<div>f({X}) = {fx.toFixed(5)}</div>)
@@ -896,6 +909,11 @@ export function calMultiple(initialN,initialMatrix1,initialX1,initialX2,initialX
     let X2 = initialX2
     let X3 = initialX3
     let A = initialMatrix1
+    for(let i = 0 ; i < n ; i++){
+        for(let j = 0 ; j < 4 ; j ++){
+            A[i][j] = parseInt(A[i][j])
+        }
+    }
       let x1 = []
       let x2 = []
       let x3 = []

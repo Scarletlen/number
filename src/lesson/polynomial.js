@@ -21,7 +21,7 @@ class Polynomial extends React.Component {
     onChangematrixXY = (e) => {
         let index = e.target.name.split(" ")
         let value = e.target.value
-        this.state.matrixA[parseInt(index[0])][parseInt(index[1])] = parseInt(value)
+        this.state.matrixA[parseInt(index[0])][parseInt(index[1])] = (value)
 
 
 
@@ -39,7 +39,7 @@ class Polynomial extends React.Component {
         }
     }
     onClickCalculator = (e) => {
-        this.setState({ data: calPoly(this.state.n, this.state.matrixA) })
+        this.setState({ data: calPoly(this.state.n, this.state.matrixA,this.state.n) })
     }
     render() {
 
