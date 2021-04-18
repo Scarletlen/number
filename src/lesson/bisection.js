@@ -16,9 +16,10 @@ class Bisection extends React.Component{
         isModalVisible: false,
         apiData: [],
         hasData: false
-      };
+    };
      
-      async getData(){
+    async getData()
+    {
         let tempData = null
         await apis.getRoot().then(res => {tempData = res.data})
         this.setState({apiData: tempData})
