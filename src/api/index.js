@@ -5,9 +5,10 @@ const api = axios.create({
 })
 
 const getRoot = () => api.get('/root_of_eqution')
+const getmatrix = () => api.get('/matrix')
 
 const apis = {
-    getRoot
+    getRoot,getmatrix
 }
 
 export default apis
