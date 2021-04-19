@@ -53,10 +53,10 @@ class InputXY extends React.Component{
             let arrCol = []
             for(let j = 0 ;  j < 2 ; j++){
                 if(j == 0){
-                    arrCol.push(<Col className = 'colInput'>  <Input style = {{width : '100px'}}  name = {i.toString()+' '+j.toString()} placeholder = 'X' onChange = {this.props.onChange} autoComplete = 'off' />  </Col>)
+                    arrCol.push(<Col className = 'colInput'>  <Input style = {{width : '100px'}}  name = {i.toString()+' '+j.toString()} placeholder = 'X' onChange = {this.props.onChange} autoComplete = 'off' value={this.props.value[i][j]}/>  </Col>)
                 }
                 else if(j == 1){
-                    arrCol.push(<Col className = 'colInput'>  <Input style = {{width : '100px'}}  name = {i.toString()+' '+j.toString()} placeholder = 'f(X)' onChange = {this.props.onChange} autoComplete = 'off'/>  </Col>)
+                    arrCol.push(<Col className = 'colInput'>  <Input style = {{width : '100px'}}  name = {i.toString()+' '+j.toString()} placeholder = 'f(X)' onChange = {this.props.onChange} autoComplete = 'off' value={this.props.value[i][j]}/>  </Col>)
                 }
                
                 
@@ -85,11 +85,11 @@ class InputMultiple extends React.Component{
             let arrCol = []
             for(let j = 0 ;  j < 4 ; j++){
                 if(j == 3 ){
-                    arrCol.push(<Col className = 'colInput'>  <Input style = {{width : '100px'}}  name = {i.toString()+' '+j.toString()} placeholder = {'Y'+i.toString()} onChange = {this.props.onChange} autoComplete = 'off'/>  </Col>)
+                    arrCol.push(<Col className = 'colInput'>  <Input style = {{width : '100px'}}  name = {i.toString()+' '+j.toString()} placeholder = {'Y'+i.toString()} onChange = {this.props.onChange} autoComplete = 'off' value={this.props.value[i][j]}/>  </Col>)
                     
                 }
                 else {
-                    arrCol.push(<Col className = 'colInput'>  <Input style = {{width : '100px'}}  name = {i.toString()+' '+j.toString()} placeholder = {'X'+i.toString()+''+j.toString()} onChange = {this.props.onChange} autoComplete = 'off'/>  </Col>)
+                    arrCol.push(<Col className = 'colInput'>  <Input style = {{width : '100px'}}  name = {i.toString()+' '+j.toString()} placeholder = {'X'+i.toString()+''+j.toString()} onChange = {this.props.onChange} autoComplete = 'off' value={this.props.value[i][j]}/>  </Col>)
                 }
                
                 

@@ -897,7 +897,8 @@ export function calPoly(initialMatrix1,initialX,n){
     
     let fx = a0+(a1*X)+(a2*(X*X))
     //ans.push({key :  1 ,fx : 'f('+X+')' , valuex : fx.toFixed(5) })
-    ans.push(<div>f({X}) = {fx.toFixed(5)}</div>)
+    //ans.push(<div>f({X}) = {fx.toFixed(5)}</div>)
+    ans.push(<div>{'f( '+X+' ) = '} {fx.toFixed(5)}</div>)
     return ans
 
 }

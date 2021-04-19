@@ -2,14 +2,53 @@ import React from 'react'
 import { Row, Col } from 'antd'
 import { Input, Button } from 'antd'
 import { InputXY } from '../Component/matrixinput'
-import { calSpline } from '../Component/calculate'
+import { calSpline,copyArray } from '../Component/calculate'
 import '../App.css'
+import apis from '../api/index'
+import Modal_Example from '../Component/model'
 class Spline extends React.Component {
     state ={
         valueX: "",
         n: 2,
         data: "",
-        matrixA : [[],[]]
+        matrixA : [[],[]],
+        isModalVisible: false,
+        apiData: [],
+        hasData: false
+    }
+    async getData()
+    {
+        let tempData = null
+        await apis.getInter().then(res => {tempData = res.data})
+        this.setState({apiData: tempData})
+        this.setState({hasData: true})
+        /* console.log(tempData); */
+    }
+
+    onClickOk = e =>{
+        this.setState({isModalVisible: false})
+    }
+
+    onClickInsert = e =>{
+/*         console.log(e.currentTarget);
+        console.log(e.target);
+        console.log(e.currentTarget.getAttribute('name'));
+        console.log(e.target.name); */
+        let index = e.currentTarget.getAttribute('name').split('_')
+            index = parseInt(index[1])
+            this.setState({
+                matrixA: copyArray(this.state.apiData[index]["n"],this.state.apiData[index]["matrixA"]),
+                n: this.state.apiData[index]["n"],
+                valueX: this.state.apiData[index]["x"],
+                isModalVisible: false
+            })
+    }
+
+    onClickExample = e =>{
+        if(!this.state.hasData){
+            this.getData()
+        }
+        this.setState({isModalVisible: true})
     }
 
     onChangeX = e => {
@@ -51,6 +90,13 @@ class Spline extends React.Component {
 
             <div className="splinein">
                  <h1 className="Ontop">Spline interpolation</h1>
+                 <Modal_Example
+                    visible = {this.state.isModalVisible}
+                    onOk = {this.onClickOk}
+                    hasData = {this.state.hasData}
+                    apiData = {this.state.apiData}
+                    onClick = {this.onClickInsert}
+                />
                 <Row>
                     <Row className='rowButtonmatrix'>
                         <Col className='buttonmatrix'>
@@ -68,7 +114,7 @@ class Spline extends React.Component {
 
                 </Row>
                 <Row className='matrix'>
-                    <Col span={24}> <InputXY n={this.state.n} onChange={this.onChangematrixXY} /> </Col>
+                    <Col span={24}> <InputXY n={this.state.n} onChange={this.onChangematrixXY} value={this.state.matrixA}/> </Col>
 
                 </Row>
                 <Row>
@@ -78,7 +124,7 @@ class Spline extends React.Component {
                 </Row>
                 <Row style={{ width: '100px', padding: '10px 40px' }}>
                     <div>
-                        <Input className="matrixip" style={{ width: '150px' }} placeholder='Example = 40000' onChange={this.onChangeX} />
+                        <Input className="matrixip" style={{ width: '150px' }} placeholder='Example = 40000' onChange={this.onChangeX} value={this.state.valueX}/>
                     </div>
 
 
@@ -86,6 +132,7 @@ class Spline extends React.Component {
                 
                 <Row className='matrix' style={{ padding: '10px 40px' }}>
                     <Button type="primary" onClick={this.onClickCalculator}>คำนวณ</Button>
+                    <span className="Poom"><Button type="primary" onClick={this.onClickExample} >Exsample</Button></span>
                 </Row>
                 <div>
                     {this.state.data}
