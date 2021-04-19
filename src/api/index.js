@@ -6,9 +6,11 @@ const api = axios.create({
 
 const getRoot = () => api.get('/root_of_eqution')
 const getmatrix = () => api.get('/matrix')
+const getInter = () => api.get('/interpolation')
+const getRegession = () => api.get('/regression')
 
 const apis = {
-    getRoot,getmatrix
+    getRoot,getmatrix,getInter,getRegession
 }
 
 export default apis
