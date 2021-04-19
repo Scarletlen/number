@@ -1,7 +1,7 @@
 import React from 'react';
 import {  Row ,Button,Col  } from 'antd';
 import {MatrixInputA, MatrixInputB} from '../Component/matrixinput'
-import {Cramercal} from '../Component/calculate'
+import {Cramercal,copyArray} from '../Component/calculate'
 import apis from '../api/index'
 import Modal_Example from '../Component/model'
 class Cremeru extends React.Component{
@@ -19,7 +19,7 @@ class Cremeru extends React.Component{
     async getData()
     {
         let tempData = null
-        await apis.getmatrix.then(res => {tempData = res.data})
+        await apis.getmatrix().then(res => {tempData = res.data})
         this.setState({apiData: tempData})
         this.setState({hasData: true})
         /* console.log(tempData); */
@@ -37,8 +37,9 @@ class Cremeru extends React.Component{
         let index = e.currentTarget.getAttribute('name').split('_')
             index = parseInt(index[1])
             this.setState({
-                matrixA: this.state.apiData[index]["matrixA"],
-                matrixB: this.state.apiData[index]["matrixB"],
+                matrixA: copyArray(this.state.apiData[index]["n"],this.state.apiData[index]["matrixA"]),
+                matrixB: [...this.state.apiData[index]["matrixB"]],
+                n: this.state.apiData[index]["n"],
                 isModalVisible: false
             })
     }

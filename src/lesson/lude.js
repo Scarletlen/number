@@ -1,7 +1,9 @@
 import React from 'react'
 import {  Row ,Button,Col , } from 'antd';
 import {MatrixInputA, MatrixInputB} from '../Component/matrixinput'
-import {LUcal} from '../Component/calculate'
+import {LUcal,copyArray} from '../Component/calculate'
+import apis from '../api/index'
+import Modal_Example from '../Component/model'
  
 class Lude extends React.Component{
     state = 
@@ -9,7 +11,45 @@ class Lude extends React.Component{
         n: 2,
         matrixA : [[],[]],
         matrixB : [],
-        result : ""
+        result : "",
+        isModalVisible: false,
+        apiData: [],
+        hasData: false
+    }
+    async getData()
+    {
+        let tempData = null
+        await apis.getmatrix().then(res => {tempData = res.data})
+        this.setState({apiData: tempData})
+        this.setState({hasData: true})
+        /* console.log(tempData); */
+    }
+
+    onClickOk = e =>{
+        this.setState({isModalVisible: false})
+    }
+
+    onClickInsert = e =>{
+/*         console.log(e.currentTarget);
+        console.log(e.target);
+        console.log(e.currentTarget.getAttribute('name'));
+        console.log(e.target.name); */
+        let index = e.currentTarget.getAttribute('name').split('_')
+            index = parseInt(index[1])
+            this.setState({
+                 
+                matrixA: copyArray(this.state.apiData[index]["n"],this.state.apiData[index]["matrixA"]),
+                matrixB: [...this.state.apiData[index]["matrixB"]],
+                n: this.state.apiData[index]["n"],
+                isModalVisible: false
+            })
+    }
+
+    onClickExample = e =>{
+        if(!this.state.hasData){
+            this.getData()
+        }
+        this.setState({isModalVisible: true})
     }
         OnChangeMatrixA = e =>{
             let changedArr = this.state.matrixA
@@ -50,6 +90,13 @@ class Lude extends React.Component{
         return(
             <div className="ludeui">
                 <h1 className ="Ontop">LU-Decompocition Method</h1>
+                <Modal_Example
+                    visible = {this.state.isModalVisible}
+                    onOk = {this.onClickOk}
+                    hasData = {this.state.hasData}
+                    apiData = {this.state.apiData}
+                    onClick = {this.onClickInsert}
+                />
                 <Button onClick={this.onClickDel}>Del</Button>{this.state.n} x {this.state.n}<Button onClick={this.onClickAdd}>Add</Button>
                 <Row>
                     <Col span ='6'>
@@ -62,6 +109,7 @@ class Lude extends React.Component{
                         <MatrixInputB n={this.state.n} onChange={this.OnChangeMatrixB} value={this.state.matrixB}/>
                     </Col>
                     <span className="Poom"><Button type="primary" onClick = {this.oncal}>Calculate</Button></span>
+                    <span className="Poom"><Button type="primary" onClick={this.onClickExample} >Exsample</Button></span>
                 </Row>
                 <div>
                     {this.state.result}
