@@ -22,6 +22,8 @@ import Multiple from '../lesson/multiple';
 import { Route } from "react-router-dom";
 import { HashRouter } from 'react-router-dom';
 import { Link,Redirect } from "react-router-dom";
+import Swagersee from './swager'
+ 
 
 const {Content , Sider } = Layout;
 const { SubMenu } = Menu;
@@ -98,6 +100,7 @@ class La extends React.Component {
                   {<Route path ='/LinearRe' component={LinearRe}></Route>}
                   {<Route path ='/Polynomial' component={Polynomial}></Route>}
                   {<Route path ='/Multiple' component={Multiple}></Route>}
+                  {<Route path ='/Swager' component={Swagersee}></Route>}
                 </div>
               </Content>
             </Layout>
