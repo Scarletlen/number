@@ -8,7 +8,7 @@ class Swagersee extends React.Component{
 
         return(
             <div>
-                <SwaggerUI url="https://my-json-server.typicode.com/Scarletlen/number/db" />
+                <SwaggerUI url="" />
             </div>
         )
     }
