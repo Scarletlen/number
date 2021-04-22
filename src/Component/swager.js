@@ -8,7 +8,7 @@ class Swagersee extends React.Component{
 
         return(
             <div>
-                <SwaggerUI url="https://github.com/Scarletlen/number/blob/main/test.json" />
+                <SwaggerUI url="http://localhost:4041" />
             </div>
         )
     }
