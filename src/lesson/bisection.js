@@ -15,7 +15,7 @@ class Bisection extends React.Component{
         result: '',
         isModalVisible: false,
         apiData: [],
-        hasData: false
+        hasData: false,
     };
      
     async getData()

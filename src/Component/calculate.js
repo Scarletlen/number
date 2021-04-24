@@ -28,7 +28,7 @@ export function bisectioncal( init_xl, init_xr, init_error,init_fx) {
     let checkError = math.bignumber(Number.MAX_VALUE)
     let newXm = 0
     let data = []
-
+    data.push(<div className = "ontopresult"> คำตอบของการคำนวนคือ</div>)
     let iteration = 1
 
     if (checkValue > 0) {
@@ -49,7 +49,7 @@ export function bisectioncal( init_xl, init_xr, init_error,init_fx) {
         }
         checkError = math.abs(math.divide(math.subtract(newXm, xm), newXm))
         xm = newXm
-        data.push(<div> {iteration}: {xm.toFixed(15).toString()}  ERROR: {math.fix(checkError, 16).toFixed(15).toString()}</div>)
+        data.push(<div className ="result"> {iteration}: {xm.toFixed(15).toString()}  ERROR: {math.fix(checkError, 16).toFixed(15).toString()}</div>)
         //data.push({key:iteration, iteration:iteration, x:xm.toString(), error:math.fix(checkError, 16).toString()})
         iteration = iteration + 1
     }
@@ -71,7 +71,7 @@ export function fasepositioncal( init_xl, init_xr, init_error,init_fx){
     let tmp_er = 9999999;
     let new_x = 0;
     let i =1;
-
+    data.push(<div className = "ontopresult"> คำตอบของการคำนวนคือ</div>)
     if(num>0){
         xr = x;
     }
@@ -92,7 +92,7 @@ export function fasepositioncal( init_xl, init_xr, init_error,init_fx){
         }
         tmp_er = math.abs(math.divide(math.subtract(new_x,x),new_x))
         x = new_x;
-        data.push(<div>{i}: z is {x.toFixed(15).toString()}</div>)
+        data.push(<div className ="result"> {i}: z is {x.toFixed(15).toString()}</div>)
         i++;
     }
 
@@ -110,7 +110,7 @@ export function onepointcal(initialEquation ,initialX,initialError){
      let arr = []
 
      let i = 1;
-     
+     arr.push(<div className = "ontopresult"> คำตอบของการคำนวนคือ</div>)
      
      let oldX = 0;
 
@@ -131,7 +131,7 @@ export function onepointcal(initialEquation ,initialX,initialError){
          oldX = X
          
         
-        arr.push(<div>i :{i} iterration :{i.toString()} x:  {X.toFixed(15).toString()} error : {checkError.toFixed(15).toString()}</div>)
+        arr.push(<div className ="result">iterration :{i.toString()} x =  {X.toFixed(15).toString()} error = {checkError.toFixed(15).toString()}</div>)
         i++
         
      }
@@ -161,6 +161,7 @@ export function Newtoncal(initialEquation, initialX, initialError) {
 
     let checkError = 9999
     let oldcheckError = 9999;
+    arr.push(<div className = "ontopresult"> คำตอบของการคำนวนคือ</div>)
     while (checkError > error) {
 
         let fXdiff = fXprime.evaluate({x : X})
@@ -178,7 +179,7 @@ export function Newtoncal(initialEquation, initialX, initialError) {
 
         oldX = X
 
-        arr.push(<div>iteration: {i.toString()} x: {X.toFixed(15).toString()} error: {checkError.toFixed(15).toString()} </div>)
+        arr.push(<div className ="result">iteration: {i.toString()} x: {X.toFixed(15).toString()} error: {checkError.toFixed(15).toString()} </div>)
         
         i++
 
@@ -204,7 +205,7 @@ export function Secantcal(initialEquation, initialX0,initialX1, initialError) {
     
 
     let arr = []
-
+    arr.push(<div className = "ontopresult"> คำตอบของการคำนวนคือ</div>)
     let i = 1;
 
 
@@ -233,7 +234,7 @@ export function Secantcal(initialEquation, initialX0,initialX1, initialError) {
 
         
 
-        arr.push(<div>iteration: {i.toString()} x: {x.toFixed(15).toString()} error: {checkError.toFixed(15).toString()}</div>)
+        arr.push(<div className ="result">iteration: {i.toString()} x: {x.toFixed(15).toString()} error: {checkError.toFixed(15).toString()}</div>)
        
         i++
 
@@ -251,7 +252,7 @@ export function Cramercal(n, initialMatrix1, initialMatrix2) {
     let temp_matrix1 = copyArray(n,matrix1)
 
     let arr = []
-
+    arr.push(<div className = "ontopresult"> คำตอบของการคำนวนคือ</div>)
     let X = [];
     
     
@@ -265,7 +266,7 @@ export function Cramercal(n, initialMatrix1, initialMatrix2) {
             X[i] = math.divide(math.det(temp_matrix1) , det_matrixA).toFixed(15).toString()
             
             //arr.push({key : i , x : 'X'+(i+1) ,valuex : X[i]})
-            arr.push(<div> X{i+1} = {X[i]}</div>)
+            arr.push(<div className ="result"> X{i+1} = {X[i]}</div>)
 
             temp_matrix1 = copyArray(n,matrix1);
         }
@@ -314,7 +315,7 @@ export function Eliminationcal(n, initialMatrix1, initialMatrix2) {
         
     }
    // X.map((x,i) => arr.push({key : i , x : 'X'+(i+1) , valuex : x.toFixed(5)}))
-    X.map((x,i) => arr.push(<div>x{i+1}= {x.toFixed(15)}</div>))
+    X.map((x,i) => arr.push(<div className ="result">x{i+1}= {x.toFixed(15)}</div>))
 
         
     return arr
@@ -373,7 +374,7 @@ export function Jordancal(n, initialMatrix1, initialMatrix2) {
         
     
     //X.map((x,i) => arr.push({key : i , x : 'X'+(i+1) , valuex : x.toFixed(5)}))
-    X.map((x,i) => arr.push(<div>x{i+1}= {x.toFixed(15)}</div>))
+    X.map((x,i) => arr.push(<div className ="result">x{i+1}= {x.toFixed(15)}</div>))
 
         
     return arr
@@ -461,7 +462,7 @@ export function LUcal(n, initialMatrix1, initialMatrix2) {
     
   
     //X.map((x, i) => arr.push({ key: i, x: 'X' + (i + 1), valuex: x.toFixed(5) }))
-    X.map((x,i) => arr.push(<div>x{i+1}= {x.toFixed(15)}</div>))
+    X.map((x,i) => arr.push(<div className ="result">x{i+1}= {x.toFixed(15)}</div>))
 
     return arr
 }
@@ -478,7 +479,7 @@ export function Jacobical(n, initialMatrix1, initialMatrix2,initialError) {
   
     
     let arr = []
-    
+    arr.push(<div className = "ontopresult"> คำตอบของการคำนวนคือ</div>)
     let resultX = []
     let ansX = []
     
@@ -533,7 +534,7 @@ export function Jacobical(n, initialMatrix1, initialMatrix2,initialError) {
     }
     for(let i = 0 ; i < n ; i++){
         //arr.push({key : i , x : 'X'+(i+1) , valuex : resultX[i].toFixed(5)})
-        arr.push(<div>X{i+1}={resultX[i].toFixed(15)}</div>)
+        arr.push(<div className ="result">X{i+1}={resultX[i].toFixed(15)}</div>)
     }
      
 
@@ -552,7 +553,7 @@ export function Seidelcal(n, initialMatrix1, initialMatrix2,initialError) {
 
     
     let arr = []
-    
+    arr.push(<div className = "ontopresult"> คำตอบของการคำนวนคือ</div>)
     let resultX = []
     let ansX = []
     
@@ -605,10 +606,11 @@ export function Seidelcal(n, initialMatrix1, initialMatrix2,initialError) {
        
     
     }
+  
     for(let i = 0 ; i < n ; i++){
         //arr.push({key : i , x : 'X'+(i+1) , valuex : resultX[i].toFixed(5)})
        
-        arr.push(<div>X{i+1}={resultX[i].toFixed(15)}</div>)
+        arr.push(<div className ="result">X{i+1}={resultX[i].toFixed(15)}</div>)
     }
      
 
@@ -628,7 +630,7 @@ export function calConjugate(n, initialMatrix1, initialMatrix2,initialError) {
   
     
     let arr = []
-    
+    arr.push(<div className = "ontopresult"> คำตอบของการคำนวนคือ</div>)
     let X = []
     
     let K = 0;
@@ -687,10 +689,10 @@ export function calConjugate(n, initialMatrix1, initialMatrix2,initialError) {
 
        K++;
     }
-       
+    
     for(let i = 0 ; i < n ; i++){
         //arr.push({key : i , x : 'X'+(i+1) , valuex : X[i].toFixed(5)})
-        arr.push(<div>X{i+1}={X[i].toFixed(15)}</div>)
+        arr.push(<div className ="result">X{i+1}={X[i].toFixed(15)}</div>)
     }    
     return arr
 }
@@ -706,7 +708,7 @@ export function calNewtonInterpolation( initialMatrix1, initialPoint,initialX) {
 
     let arr = []
     let ans = []
-
+    ans.push(<div className = "ontopresult"> คำตอบของการคำนวนคือ</div>)
    
    for(let i = 0 ; i < P.length ; i++){
            arr.push(A[parseInt(P[i])-1])
@@ -718,7 +720,7 @@ export function calNewtonInterpolation( initialMatrix1, initialPoint,initialX) {
    
 
     //ans.push({key :  1 ,fx : 'f('+X+')' , valuex : findX(X) })
-   ans.push(<div>f({X})={findX(X)}</div>)
+   ans.push(<div className ="result">f({X})={findX(X)}</div>)
    return ans
 }
 
@@ -735,7 +737,7 @@ export function calLagrange(initialMatrix1,initialPoint,initialX){
 
     let arr = []
     let ans = []
-
+    ans.push(<div className = "ontopresult"> คำตอบของการคำนวนคือ</div>)
    
    for(let i = 0 ; i < P.length ; i++){
            arr.push(A[parseInt(P[i])-1])
@@ -787,7 +789,8 @@ export function calLagrange(initialMatrix1,initialPoint,initialX){
 			b += a * ys[j];
 			c += a;
 		} else {
-            ans.push({key :  1 ,fx : 'f('+X+')' , valuex : ys[j] })
+            //ans.push({key :  1 ,fx : 'f('+X+')' , valuex : ys[j] })
+            ans.push(<div className = "result">f({X}) = {ys[j]}</div>)
 			return ans;
             
 			
@@ -797,7 +800,7 @@ export function calLagrange(initialMatrix1,initialPoint,initialX){
 
 
     //ans.push({key :  1 ,fx : 'f('+X+')' , valuex : (b/c).toFixed(5) })
-	ans.push(<div>f({X}) = {(b/c).toFixed(5)}</div>)
+	ans.push(<div className ="result">f({X}) = {(b/c).toFixed(5)}</div>)
     return ans
 }
 
@@ -814,7 +817,7 @@ export function calSpline(initialMatrix1,initialX){
 
     
     let ans = []
-
+    ans.push(<div className = "ontopresult"> คำตอบของการคำนวนคือ</div>)
   
 
    //-----------------------------------------------------------//
@@ -840,7 +843,7 @@ export function calSpline(initialMatrix1,initialX){
     
 
     //ans.push({key :  1 ,fx : 'f('+X+')' , valuex : spline.at(X) })
-	ans.push(<div>F({X}) = {spline.at(X)}</div>)
+	ans.push(<div className ="result" >F({X}) = {spline.at(X)}</div>)
 
     return ans
 
@@ -864,9 +867,9 @@ export function calLinear(initialMatrix1,initialX,n){
      console.log(gradient)
      console.log(yIntercept)
     let ans = []
-    
+    ans.push(<div className = "ontopresult"> คำตอบของการคำนวนคือ</div>)
     //ans.push({key :  1 ,fx : 'f('+X+')' , valuex : (yIntercept + (gradient*X)).toFixed(5) })
-	ans.push(<div>f({X}) = {(yIntercept + (gradient*X)).toFixed(5)}</div>)
+	ans.push(<div className ="result">f({X}) = {(yIntercept + (gradient*X)).toFixed(5)}</div>)
 
     return ans
 
@@ -894,11 +897,11 @@ export function calPoly(initialMatrix1,initialX,n){
     console.log(a2)
 
     let ans = [] 
-    
+    ans.push(<div className = "ontopresult"> คำตอบของการคำนวนคือ</div>)
     let fx = a0+(a1*X)+(a2*(X*X))
     //ans.push({key :  1 ,fx : 'f('+X+')' , valuex : fx.toFixed(5) })
     //ans.push(<div>f({X}) = {fx.toFixed(5)}</div>)
-    ans.push(<div>{'f( '+X+' ) = '} {fx.toFixed(5)}</div>)
+    ans.push(<div className ="result">{'f( '+X+' ) = '} {fx.toFixed(5)}</div>)
     return ans
 
 }
@@ -1021,6 +1024,7 @@ export function calMultiple(initialN,initialMatrix1,initialX1,initialX2,initialX
     
     
     let arr = []
+    arr.push(<div className = "ontopresult"> คำตอบของการคำนวนคือ</div>)
     let X = []
     
     for(let i = 0 ; i < 4 ; i++){
@@ -1063,7 +1067,7 @@ export function calMultiple(initialN,initialMatrix1,initialX1,initialX2,initialX
     let fX = X[0] + X[1]*X1+X[2]*X2+X[3]*X3
 
     //arr.push({key :  1 ,fx : 'Y' , valuex : fX.toFixed(5) })
-    arr.push(<div>Y = {fX.toFixed(5)}</div>)
+    arr.push(<div className ="result">Y = {fX.toFixed(5)}</div>)
     return arr
 
 

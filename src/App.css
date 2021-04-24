@@ -87,3 +87,13 @@
 .matrixip{
   border-radius: 5px;
 }
+
+.result{
+  margin-top: 10px;
+  font-size: 20px;
+}
+
+.ontopresult{
+  margin-top: 10px;
+  font-size: calc(5px + 2vmin);
+}

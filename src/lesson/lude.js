@@ -14,6 +14,7 @@ class Lude extends React.Component{
         result : "",
         isModalVisible: false,
         apiData: [],
+        topre: "",
         hasData: false
     }
     async getData()
@@ -83,7 +84,8 @@ class Lude extends React.Component{
 
         oncal = e =>{
             this.setState({
-                result : LUcal(this.state.n,this.state.matrixA,this.state.matrixB)
+                result : LUcal(this.state.n,this.state.matrixA,this.state.matrixB),
+                topre : <div className = "ontopresult"> คำตอบของการคำนวนคือ</div>
             })
         }
     render(){
@@ -112,6 +114,7 @@ class Lude extends React.Component{
                     <span className="Poom"><Button type="primary" onClick={this.onClickExample} >Exsample</Button></span>
                 </Row>
                 <div>
+                    {this.state.topre}
                     {this.state.result}
                 </div>
             </div>
