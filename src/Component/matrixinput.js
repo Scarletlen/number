@@ -56,7 +56,7 @@ class InputXY extends React.Component{
                     arrCol.push(<Col className = 'colInput'>  <Input style = {{width : '100px'}}  name = {i.toString()+' '+j.toString()} placeholder = 'X' onChange = {this.props.onChange} autoComplete = 'off' value={this.props.value[i][j]}/>  </Col>)
                 }
                 else if(j == 1){
-                    arrCol.push(<Col className = 'colInput'>  <Input style = {{width : '100px'}}  name = {i.toString()+' '+j.toString()} placeholder = 'f(X)' onChange = {this.props.onChange} autoComplete = 'off' value={this.props.value[i][j]}/>  </Col>)
+                    arrCol.push(<Col className = 'colInput'>  <Input style = {{width : '100px'}}  name = {i.toString()+' '+j.toString()} placeholder = 'Y' onChange = {this.props.onChange} autoComplete = 'off' value={this.props.value[i][j]}/>  </Col>)
                 }
                
                 
