@@ -1,14 +1,14 @@
 import React from 'react'
 import SwaggerUI from "swagger-ui-react"
 import "swagger-ui-react/swagger-ui.css"
-
+import {config} from './APIConfig'
 class Swagersee extends React.Component{
 
     render(){
 
         return(
             <div>
-                <SwaggerUI url="http://localhost:4041" />
+                <SwaggerUI spec={config}  />
             </div>
         )
     }
