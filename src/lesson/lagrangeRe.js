@@ -2,7 +2,7 @@ import React from 'react'
 import { Row, Col } from 'antd'
 import { Input, Button } from 'antd'
 import { InputXY } from '../Component/matrixinput'
-import { calLagrange,copyArray } from '../Component/calculate'
+import { calLagrange, copyArray } from '../Component/calculate'
 import '../App.css'
 import apis from '../api/index'
 import Modal_Example from '../Component/model'
@@ -18,40 +18,39 @@ class Lagrange extends React.Component {
         apiData: [],
         hasData: false
     }
-    async getData()
-    {
+    async getData() {
         let tempData = null
-        await apis.getInter().then(res => {tempData = res.data})
-        this.setState({apiData: tempData})
-        this.setState({hasData: true})
+        await apis.getInter().then(res => { tempData = res.data })
+        this.setState({ apiData: tempData })
+        this.setState({ hasData: true })
         /* console.log(tempData); */
     }
 
-    onClickOk = e =>{
-        this.setState({isModalVisible: false})
+    onClickOk = e => {
+        this.setState({ isModalVisible: false })
     }
 
-    onClickInsert = e =>{
-/*         console.log(e.currentTarget);
-        console.log(e.target);
-        console.log(e.currentTarget.getAttribute('name'));
-        console.log(e.target.name); */
+    onClickInsert = e => {
+        /*         console.log(e.currentTarget);
+                console.log(e.target);
+                console.log(e.currentTarget.getAttribute('name'));
+                console.log(e.target.name); */
         let index = e.currentTarget.getAttribute('name').split('_')
-            index = parseInt(index[1])
-            this.setState({
-                matrixA: copyArray(this.state.apiData[index]["n"],this.state.apiData[index]["matrixA"]),
-                Point : [...this.state.apiData[index]["point"]],
-                n: this.state.apiData[index]["n"],
-                valueX: this.state.apiData[index]["x"],
-                isModalVisible: false
-            })
+        index = parseInt(index[1])
+        this.setState({
+            matrixA: copyArray(this.state.apiData[index]["n"], this.state.apiData[index]["matrixA"]),
+            Point: [...this.state.apiData[index]["point"]],
+            n: this.state.apiData[index]["n"],
+            valueX: this.state.apiData[index]["x"],
+            isModalVisible: false
+        })
     }
 
-    onClickExample = e =>{
-        if(!this.state.hasData){
+    onClickExample = e => {
+        if (!this.state.hasData) {
             this.getData()
         }
-        this.setState({isModalVisible: true})
+        this.setState({ isModalVisible: true })
     }
     onChangeX = e => {
         this.setState
@@ -96,20 +95,21 @@ class Lagrange extends React.Component {
             <div className="newtondevide">
                 <h1 className="Ontop">Lagrange polynomials</h1>
                 <Modal_Example
-                    visible = {this.state.isModalVisible}
-                    onOk = {this.onClickOk}
-                    hasData = {this.state.hasData}
-                    apiData = {this.state.apiData}
-                    onClick = {this.onClickInsert}
+                    visible={this.state.isModalVisible}
+                    onOk={this.onClickOk}
+                    hasData={this.state.hasData}
+                    apiData={this.state.apiData}
+                    onClick={this.onClickInsert}
                 />
                 <Row>
                     <Row className='rowButtonmatrix'>
                         <Col className='buttonmatrix'>
-                            <Button type="primary" onClick={this.onClickmatrixadd}> เพิ่มขนาดเมตตริกซ์ </Button>
-                        </Col>
-                        <Col className='buttonmatrix'>
                             <Button type="primary" onClick={this.onClickmatrixdel}> ลดขนาดเมตตริกซ์ </Button>
                         </Col>
+                        <Col className='buttonmatrix'>
+                            <Button type="primary" onClick={this.onClickmatrixadd}> เพิ่มขนาดเมตตริกซ์ </Button>
+                        </Col>
+
 
                     </Row>
 
@@ -119,7 +119,7 @@ class Lagrange extends React.Component {
 
                 </Row>
                 <Row className='matrix'>
-                    <Col span={24}> <InputXY n={this.state.n} onChange={this.onChangematrixXY} value={this.state.matrixA}/> </Col>
+                    <Col span={24}> <InputXY n={this.state.n} onChange={this.onChangematrixXY} value={this.state.matrixA} /> </Col>
 
                 </Row>
                 <Row>
@@ -129,7 +129,7 @@ class Lagrange extends React.Component {
                 </Row>
                 <Row style={{ width: '100px', padding: '10px 40px' }}>
                     <div>
-                        <Input className="matrixip" style={{ width: '150px' }} placeholder='Example = 40000' onChange={this.onChangeX} value={this.state.valueX}/>
+                        <Input className="matrixip" style={{ width: '150px' }} placeholder='Example = 40000' onChange={this.onChangeX} value={this.state.valueX} />
                     </div>
 
 
@@ -141,7 +141,7 @@ class Lagrange extends React.Component {
                 </Row>
                 <Row style={{ width: '100px', padding: '10px 40px' }}>
                     <div>
-                        <Input className="matrixip" style={{ width: '150px' }} placeholder='Example = 1,2,3' onChange={this.onChangePoint} value={this.state.Point}/>
+                        <Input className="matrixip" style={{ width: '150px' }} placeholder='Example = 1,2,3' onChange={this.onChangePoint} value={this.state.Point} />
                     </div>
 
 
