@@ -63,7 +63,7 @@ class Spline extends React.Component {
         this.state.matrixA[parseInt(index[0])][parseInt(index[1])] = value
     }
     onClickmatrixadd = (e) => {
-        if (this.state.n < 6) {
+        if (this.state.n < 10) {
             this.setState({ n: this.state.n += 1 })
             this.state.matrixA.push([])
         }
