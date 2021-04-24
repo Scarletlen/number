@@ -1,7 +1,7 @@
 import React from 'react'
 import { Row, Col, Input, Button } from 'antd'
 import { InputXY } from '../Component/matrixinput'
-import { calPoly,copyArray } from '../Component/calculate'
+import { calPoly, copyArray } from '../Component/calculate'
 import apis from '../api/index'
 import Modal_Example from '../Component/model'
 class Polynomial extends React.Component {
@@ -15,39 +15,38 @@ class Polynomial extends React.Component {
         apiData: [],
         hasData: false
     }
-    async getData()
-    {
+    async getData() {
         let tempData = null
-        await apis.getRegession().then(res => {tempData = res.data})
-        this.setState({apiData: tempData})
-        this.setState({hasData: true})
+        await apis.getRegession().then(res => { tempData = res.data })
+        this.setState({ apiData: tempData })
+        this.setState({ hasData: true })
         /* console.log(tempData); */
     }
 
-    onClickOk = e =>{
-        this.setState({isModalVisible: false})
+    onClickOk = e => {
+        this.setState({ isModalVisible: false })
     }
 
-    onClickInsert = e =>{
-/*         console.log(e.currentTarget);
-        console.log(e.target);
-        console.log(e.currentTarget.getAttribute('name'));
-        console.log(e.target.name); */
+    onClickInsert = e => {
+        /*         console.log(e.currentTarget);
+                console.log(e.target);
+                console.log(e.currentTarget.getAttribute('name'));
+                console.log(e.target.name); */
         let index = e.currentTarget.getAttribute('name').split('_')
-            index = parseInt(index[1])
-            this.setState({
-                matrixA: copyArray(this.state.apiData[index]["n"],this.state.apiData[index]["matrixA"]),
-                n: this.state.apiData[index]["n"],
-                valueX: this.state.apiData[index]["x"],
-                isModalVisible: false
-            })
+        index = parseInt(index[1])
+        this.setState({
+            matrixA: copyArray(this.state.apiData[index]["n"], this.state.apiData[index]["matrixA"]),
+            n: this.state.apiData[index]["n"],
+            valueX: this.state.apiData[index]["x"],
+            isModalVisible: false
+        })
     }
 
-    onClickExample = e =>{
-        if(!this.state.hasData){
+    onClickExample = e => {
+        if (!this.state.hasData) {
             this.getData()
         }
-        this.setState({isModalVisible: true})
+        this.setState({ isModalVisible: true })
     }
 
     onChangeX = e => {
@@ -76,28 +75,29 @@ class Polynomial extends React.Component {
         }
     }
     onClickCalculator = (e) => {
-        this.setState({ data: calPoly(this.state.matrixA, this.state.valueX,this.state.n) })
+        this.setState({ data: calPoly(this.state.matrixA, this.state.valueX, this.state.n) })
     }
     render() {
 
         return (
 
             <div className="polynomial">
-                <h1 className="Ontop">polynomial Regression</h1>
+                <h1 className="Ontop">Polynomial Regression</h1>
                 <Modal_Example
-                    visible = {this.state.isModalVisible}
-                    onOk = {this.onClickOk}
-                    hasData = {this.state.hasData}
-                    apiData = {this.state.apiData}
-                    onClick = {this.onClickInsert}
+                    visible={this.state.isModalVisible}
+                    onOk={this.onClickOk}
+                    hasData={this.state.hasData}
+                    apiData={this.state.apiData}
+                    onClick={this.onClickInsert}
                 />
                 <Row>
                     <Row className='rowButtonmatrix'>
                         <Col className='buttonmatrix'>
-                            <Button type="primary" onClick={this.onClickmatrixadd}> เพิ่มขนาดเมตตริกซ์ </Button>
-                        </Col>
-                        <Col className='buttonmatrix'>
                             <Button type="primary" onClick={this.onClickmatrixdel}> ลดขนาดเมตตริกซ์ </Button>
+                        </Col>
+
+                        <Col className='buttonmatrix'>
+                            <Button type="primary" onClick={this.onClickmatrixadd}> เพิ่มขนาดเมตตริกซ์ </Button>
                         </Col>
 
                     </Row>
@@ -108,7 +108,7 @@ class Polynomial extends React.Component {
 
                 </Row>
                 <Row className='matrix'>
-                    <Col span={24}> <InputXY n={this.state.n} onChange={this.onChangematrixXY} value={this.state.matrixA}/> </Col>
+                    <Col span={24}> <InputXY n={this.state.n} onChange={this.onChangematrixXY} value={this.state.matrixA} /> </Col>
 
                 </Row>
                 <Row>
@@ -118,7 +118,7 @@ class Polynomial extends React.Component {
                 </Row>
                 <Row style={{ width: '100px', padding: '10px 40px' }}>
                     <div>
-                        <Input className="matrixip" style={{ width: '150px' }} placeholder='Example = 40000' onChange={this.onChangeX} value={this.state.valueX}/>
+                        <Input className="matrixip" style={{ width: '150px' }} placeholder='Example = 40000' onChange={this.onChangeX} value={this.state.valueX} />
                     </div>
 
 
