@@ -16,6 +16,9 @@ const config = {
                 "responses": {
                     "200": {
                         "description" : "ทำงานสำเร็จ"
+                    },
+                    "404":{
+                        "description" : "ไม่พบโจทย์"
                     }
                 }
             }
