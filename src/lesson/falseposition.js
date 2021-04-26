@@ -72,7 +72,7 @@ class Falseposition extends React.Component {
     };
 
     show_varlue = (e) => {
-        this.setState({ result: fasepositioncal(this.state.XL, this.state.XR, this.state.ERROR, this.state.Equation) });
+        this.setState({ result: fasepositioncal(this.state.Equation,this.state.XL, this.state.XR, this.state.ERROR ) });
     };
 
     render() {
