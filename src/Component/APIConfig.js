@@ -7,7 +7,7 @@ const config = {
     "host": "my-json-server.typicode.com/Scarletlen/number",
     
     "paths":{
-        "/root_of_equation":{
+        "/root_of_eqution":{
             "get":{
                 "tags":[
                     "API"
@@ -23,7 +23,7 @@ const config = {
                 }
             }
         },
-        "/root_of_equation/{ExampleId}":{
+        "/root_of_eqution/{ExampleId}":{
             "get":{
                 "tags":[
                     "API"
