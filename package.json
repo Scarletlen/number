@@ -10,6 +10,7 @@
     "antd": "^4.13.0",
     "axios": "^0.21.1",
     "cubic-spline": "^3.0.3",
+    "expect": "^26.6.2",
     "expr-eval": "^2.0.2",
     "interpolating-polynomial": "^1.1.2",
     "linear-interpolator": "^1.0.2",
