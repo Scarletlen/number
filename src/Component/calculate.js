@@ -720,20 +720,73 @@ export function calNewtonInterpolation(initialMatrix1, initialPoint, initialX) {
 
     let arr = []
     let ans = []
-    ans.push(<div className="ontopresult"> คำตอบของการคำนวนคือ</div>)
+    //ans.push(<div className="ontopresult"> คำตอบของการคำนวนคือ</div>)
 
     for (let i = 0; i < P.length; i++) {
         arr.push(A[parseInt(P[i]) - 1])
     }
 
-    console.log(arr.toString())
+    
     let findX = interpolationQuadratic_Poly_linear(arr)
 
 
 
     //ans.push({key :  1 ,fx : 'f('+X+')' , valuex : findX(X) })
-    ans.push(<div className="result">f({X})={findX(X)}</div>)
-    return ans
+    //ans.push(<div className="result">f({X})={findX(X)}</div>)
+
+    return findX(X)
+}
+export function calNewtonInterpolation2(initialMatrix1, initialPoint, initialX) {
+    let A = initialMatrix1
+
+    let P = initialPoint
+    let X = initialX
+
+    let n = P.length
+    let arr_x = []
+    let arr_fx = [[]]
+    P.map(x => {
+        arr_x.push(A[(+x)-1][0])
+        arr_fx[0].push(A[(+x)-1][1])
+    })
+
+    for(let i=0;i<n-1;i++){
+        let dynamic = []
+        for(let j=0;j<n-i-1;j++){
+            let value = math.bignumber(arr_fx[i][j+1])
+            value = math.subtract(value,arr_fx[i][j])
+            let temp = math.bignumber(arr_x[i+j+1])
+            temp = math.subtract(temp,arr_x[j])
+            value = math.divide(value,temp)
+            dynamic.push(value)
+        }
+        arr_fx.push(dynamic)
+    }
+    let sum = math.bignumber(arr_fx[0][0]);
+    let C = math.bignumber(1);
+    let arrc=[]
+    
+    arrc.push(math.bignumber(arr_fx[0][0]).toFixed(15))
+    // if(arrc[0].includes("e")){
+    //     arrc[0]=arrc[0].replaceAll("e","*10^(")
+    //     arrc[0]=arrc[0].concat(")")
+    // }
+    for(let i=0;i<n-1;i++){
+        
+        arrc.push(arr_fx[i+1][0].toFixed(15))
+        // if(arrc[i+1].includes("e")){
+        //     arrc[i+1]=arrc[i+1].replaceAll("e","*10^(")
+        //     arrc[i+1]=arrc[i+1].concat(")")
+        // }
+        let temp = math.bignumber(initialX)
+        temp = math.subtract(temp,arr_x[i])
+        C = math.multiply(C,temp)
+        temp = math.multiply(C,arr_fx[i+1][0])
+        sum = math.add(sum,temp)
+    }
+    console.log(arrc)
+    return {ans: sum.toString(),c: arrc}
+
 }
 
 export function calLagrange(initialMatrix1, initialPoint, initialX) {
