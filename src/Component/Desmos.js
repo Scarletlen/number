@@ -1,4 +1,4 @@
-import Desmos from'desmos'
+const Desmos=require('desmos')
 
 function  getDesmosInstance (){
 
