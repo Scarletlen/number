@@ -3,7 +3,7 @@ import { Row, Col, Input, Button } from 'antd'
 import { InputMultiple} from '../Component/matrixinput'
 import { calMultiple,copyArray  } from '../Component/calculate'
 import apis from '../api/index'
-import Modal_Example from '../Component/model'
+import Modal_Example from '../Component/modelre'
 class Multiple extends React.Component {
     state = {
         n: 2,
@@ -13,7 +13,8 @@ class Multiple extends React.Component {
         matrixA: [[], []],
         isModalVisible: false,
         apiData: [],
-        hasData: false
+        hasData: false,
+        Ex: 2
 
     }
     async getData()
@@ -100,6 +101,7 @@ class Multiple extends React.Component {
                     hasData = {this.state.hasData}
                     apiData = {this.state.apiData}
                     onClick = {this.onClickInsert}
+                    onEx = {this.state.Ex}
                 />
                 <Col span={12} style={{ padding: '10px 0 0' }}>
                     <Row>

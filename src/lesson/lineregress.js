@@ -3,7 +3,7 @@ import { Row, Col, Input, Button } from 'antd'
 import { InputXY } from '../Component/matrixinput'
 import { calLinear, copyArray } from '../Component/calculate'
 import apis from '../api/index'
-import Modal_Example from '../Component/model'
+import Modal_Example from '../Component/modelre'
 class LinearRe extends React.Component {
     state = {
         n: 2,
@@ -12,7 +12,8 @@ class LinearRe extends React.Component {
         data: "",
         isModalVisible: false,
         apiData: [],
-        hasData: false
+        hasData: false,
+        EX: 0
     }
     async getData() {
         let tempData = null
@@ -88,6 +89,7 @@ class LinearRe extends React.Component {
                     hasData={this.state.hasData}
                     apiData={this.state.apiData}
                     onClick={this.onClickInsert}
+                    onEx = {this.state.EX}
                 />
                 <Row>
                     <Row className='rowButtonmatrix'>

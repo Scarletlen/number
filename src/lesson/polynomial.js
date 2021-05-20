@@ -3,7 +3,7 @@ import { Row, Col, Input, Button } from 'antd'
 import { InputXY } from '../Component/matrixinput'
 import { calPoly, copyArray } from '../Component/calculate'
 import apis from '../api/index'
-import Modal_Example from '../Component/model'
+import Modal_Example from '../Component/modelre'
 class Polynomial extends React.Component {
     state = {
         n: 2,
@@ -13,7 +13,8 @@ class Polynomial extends React.Component {
         data: "",
         isModalVisible: false,
         apiData: [],
-        hasData: false
+        hasData: false,
+        EX: 1
     }
     async getData() {
         let tempData = null
@@ -89,6 +90,7 @@ class Polynomial extends React.Component {
                     hasData={this.state.hasData}
                     apiData={this.state.apiData}
                     onClick={this.onClickInsert}
+                    onEx = {this.state.EX}
                 />
                 <Row>
                     <Row className='rowButtonmatrix'>
